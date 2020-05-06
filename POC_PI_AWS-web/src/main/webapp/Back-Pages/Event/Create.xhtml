@@ -1,0 +1,108 @@
+<ui:composition 
+xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/back/Template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="body">
+	 <li class="nav-item active">
+                		<h:form> <h:commandLink action="/event?faces-redirect=true" styleClass="nav-link"> 
+                            <i class="material-icons">event</i>
+                            <p>Events</p>
+                        </h:commandLink>
+                        </h:form> 
+                </li>
+    		<div class="row">
+			<div class="col-md-8">
+				<div class="card">
+					<div class="card-header card-header-primary">
+						<h4 class="card-title">Create your Event</h4>
+					
+					</div>
+					<h:form>
+					<div class="card-body">
+						
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">Name</label>
+									<h:inputText value="#{EventBean.name}" pt:placeholder="Name"  styleClass="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div>
+									<label class="bmd-label-floating">Picture</label>
+									<h:inputText value="#{EventBean.image}" pt:placeholder="image"  styleClass="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">Theme</label>
+									<h:inputText value="#{EventBean.Category}" pt:placeholder="Category"  styleClass="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">Location</label>
+									<h:inputText value="#{EventBean.Description}" pt:placeholder="Description"  styleClass="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">Event Date</label>
+									<h:inputText pt:type="date" value="#{EventBean.EventDate}" style="form-control"/>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">Start Hour</label>
+									<h:inputText pt:type="date" value="#{EventBean.HeureD}" style="form-control"/>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">End Hour</label>
+									<h:inputText pt:type="date" value="#{EventBean.HeureF}" style="form-control"/>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">Place Number</label>
+									<h:inputText pt:type="date" value="#{EventBean.number_P}" style="form-control"/>
+								</div>
+							</div>
+						</div>
+						<div class="row pull-left">
+						<h:commandButton action="#{EventBean.addEvent()}" value="Create Event" styleClass="btn btn-primary pull-right" />
+							<div class="clearfix"></div>
+						</div>
+						<div class="row pull-right">
+						<h:commandLink action="/Event/event?faces-redirect=true" value="Back to List" styleClass="btn btn-warning" />
+							
+						</div>
+						</div>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		
+	
+		</ui:define>
+</ui:composition>
