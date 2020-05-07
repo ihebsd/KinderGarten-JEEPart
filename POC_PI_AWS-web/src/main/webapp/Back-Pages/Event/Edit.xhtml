@@ -1,0 +1,116 @@
+<ui:composition 
+xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/Template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+    
+	<ui:param name="page_name" value="Edit" />
+    <ui:define name="body">
+<li class="nav-item active">
+                		<h:form> <h:commandLink action="/back-pages/event/event?faces-redirect=true" styleClass="nav-link"> 
+                            <i class="material-icons">event</i>
+                            <p>Events</p>
+                        </h:commandLink>
+                        </h:form> 
+                </li>
+
+
+		<div class="row">
+			<div class="col-md-8">
+				<div class="card">
+					<div class="card-header card-header-primary">
+						<h4 class="card-title">Update your Event</h4>
+					
+					</div>
+					<h:form>
+					<div class="card-body">
+						
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">Name</label>
+									<h:inputText value="#{EventBean.name}" pt:placeholder="Name"  styleClass="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div>
+									<label class="bmd-label-floating">Picture</label>
+									<h:inputText value="#{EventBean.image}" pt:placeholder="Picture"  styleClass="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">Category</label>
+									<h:inputText value="#{EventBean.Category}" pt:placeholder="Theme"  styleClass="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">Description</label>
+									<h:inputText value="#{EventBean.Description}" pt:placeholder="Description"  styleClass="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">Event Date</label>
+									<h:inputText value="#{EventBean.EventDate}" pt:placeholder="date"  styleClass="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">Start Hour</label>
+									<h:inputText value="#{EventBean.HeureD}" pt:placeholder="Start Hour"  styleClass="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">End Hour</label>
+									<h:inputText value="#{EventBean.HeureF}" pt:placeholder="End Hour"  styleClass="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">Place Number </label>
+									<h:inputText value="#{EventBean.number_P}" pt:placeholder="Place Number"  styleClass="form-control" />
+								</div>
+							</div>
+						</div>
+						<div class="row pull-right">
+						<h:commandButton  value="Update" action="#{eventBean.MAJEvent()}" class="btn btn-primary btn-round" />
+							<div class="clearfix"></div>
+						</div>
+						
+						</div>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		
+
+
+	</ui:define>
+    
+    
+	
+	
+</ui:composition>	

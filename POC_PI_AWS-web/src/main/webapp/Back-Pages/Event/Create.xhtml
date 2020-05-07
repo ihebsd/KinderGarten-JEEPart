@@ -5,10 +5,13 @@ xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-	template="/back/Template.xhtml"
+	template="/Back/Template.xhtml"
 	xmlns:p="http://primefaces.org/ui">
+	
+	
+	<ui:param name="page_name" value="Create" />
 	<ui:define name="body">
-	 <li class="nav-item active">
+	<li class="nav-item active">
                 		<h:form> <h:commandLink action="/event?faces-redirect=true" styleClass="nav-link"> 
                             <i class="material-icons">event</i>
                             <p>Events</p>
@@ -29,7 +32,7 @@ xmlns="http://www.w3.org/1999/xhtml"
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="bmd-label-floating">Name</label>
-									<h:inputText value="#{EventBean.name}" pt:placeholder="Name"  styleClass="form-control" />
+									<h:inputText value="#{EventBean.Name}" pt:placeholder="Name"  styleClass="form-control" />
 								</div>
 							</div>
 						</div>
@@ -69,7 +72,7 @@ xmlns="http://www.w3.org/1999/xhtml"
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="bmd-label-floating">Start Hour</label>
-									<h:inputText pt:type="date" value="#{EventBean.HeureD}" style="form-control"/>
+									<h:inputText  value="#{EventBean.HeureD}" style="form-control"/>
 								</div>
 							</div>
 						</div>
@@ -77,7 +80,7 @@ xmlns="http://www.w3.org/1999/xhtml"
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="bmd-label-floating">End Hour</label>
-									<h:inputText pt:type="date" value="#{EventBean.HeureF}" style="form-control"/>
+									<h:inputText value="#{EventBean.HeureF}" style="form-control"/>
 								</div>
 							</div>
 						</div>
@@ -85,7 +88,7 @@ xmlns="http://www.w3.org/1999/xhtml"
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="bmd-label-floating">Place Number</label>
-									<h:inputText pt:type="date" value="#{EventBean.number_P}" style="form-control"/>
+									<h:inputText value="#{EventBean.number_P}" style="form-control"/>
 								</div>
 							</div>
 						</div>
@@ -103,6 +106,5 @@ xmlns="http://www.w3.org/1999/xhtml"
 				</div>
 			</div>
 		
-	
 		</ui:define>
 </ui:composition>

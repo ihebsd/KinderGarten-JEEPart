@@ -64,7 +64,7 @@ public class EventService implements EventServiceRemote {
        	 m.setEventId(object.getJsonObject(i).getInt("EventId")); 
     	 m.setName(object.getJsonObject(i).getString("Name")); 
     	 m.setImage(object.getJsonObject(i).getString("image")); 
-    	// m.setCategory(object.getJsonObject(i).getCategory("Category")); 
+    	 m.setCategory(object.getJsonObject(i).getString("Category")); 
     	 m.setDescription(object.getJsonObject(i).getString("Description"));
     	 m.setDateEvent(object.getJsonObject(i).getString("DateEvent"));
     	 m.setHeureF(object.getJsonObject(i).getString("HeureF"));

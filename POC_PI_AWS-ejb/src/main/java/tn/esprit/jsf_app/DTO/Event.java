@@ -10,7 +10,7 @@ public class Event implements Serializable {
 	public int EventId;
 	public String Name; 
 	public String image;
-	public Category Category;
+	public String Category;
 	public int number_P ;
 	public String DateEvent;
 	public String HeureD;
@@ -39,12 +39,13 @@ public class Event implements Serializable {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public Category getCategory() {
+	public String getCategory() {
 		return Category;
 	}
-	public void setCategory(Category category) {
+	public void setCategory(String category) {
 		Category = category;
 	}
+	
 	public int getNumber_P() {
 		return number_P;
 	}
@@ -82,7 +83,7 @@ public class Event implements Serializable {
 		return "Event [EventId=" + EventId + ", Name=" + Name + ", Picture=" + image + ", Theme=" + Category
 				+ ", Description=" + Description + ", DateEvent=" + DateEvent + ", HeureDebut=" + HeureD + ", HeureDebut=" + HeureD + "]";
 	}
-	public Event( String name, String image, Category Category, String Description, String DateEvent, String HeureD, String HeureF) {
+	public Event( String name, String image, String Category, String Description, String DateEvent, String HeureD, String HeureF) {
 		
 		Name = name;
 		image = image;
@@ -92,7 +93,7 @@ public class Event implements Serializable {
 		HeureF = HeureF;
 		HeureD = HeureD;
 	}
-	public Event(int eventId, String name, String image, Category Category, String Description, String DateEvent, String HeureD, String HeureF) {
+	public Event(int eventId, String name, String image, String Category, String Description, String DateEvent, String HeureD, String HeureF) {
 		super();
 		
 		EventId = eventId;

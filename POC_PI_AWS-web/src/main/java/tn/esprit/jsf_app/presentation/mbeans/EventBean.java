@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import tn.esprit.jsf_app.DTO.Event;
 import tn.esprit.jsf_app.DTO.*;
 import tn.esprit.jsf_app.services.EventService;
 
@@ -14,12 +13,7 @@ public class EventBean {
 	public int EventId;
 	public String Name;
 	public String image;
-
-	public int getEventId() {
-		return EventId;
-	}
-
-	public Category Category;
+	public String Category;
 	public int number_P;
 	public String DateEvent;
 	public String HeureD;
@@ -29,6 +23,10 @@ public class EventBean {
 	private static final long serialVersionUID = 1L;
 
 	EventService E = new EventService();
+	
+	public int getEventId() {
+		return EventId;
+	}
 
 	public List<Event> getEvent() {
 		return Event;
@@ -45,7 +43,7 @@ public class EventBean {
 
 	public String supprimer(Event e) {
 		E.Delete(e);
-		return "event.jsf";
+		return "Event.jsf";
 
 	}
 
@@ -57,7 +55,7 @@ public class EventBean {
 		 HeureD,
 		 HeureF	 
 		 ));
-		return "event.jsf";
+		return "Event.jsf";
 
 	}
 
@@ -74,7 +72,7 @@ public class EventBean {
 		this.setNumber_P(e.getNumber_P());
 		System.out.println(e.getEventId());
 
-		return "edit.jsf";
+		return "Edit.jsf";
 
 	}
 
@@ -83,7 +81,7 @@ public class EventBean {
 		E.Update(EventId, new Event(Name, image,Category, Description, DateEvent, HeureD, HeureF ));
 		Event = E.GetAll();
 
-		return "event.jsf";
+		return "Event.jsf";
 	}
 
 	public void setEventId(int eventId) {
@@ -106,11 +104,11 @@ public class EventBean {
 		this.image = image;
 	}
 
-	public Category getCategory() {
+	public String getCategory() {
 		return Category;
 	}
 
-	public void setCategory(Category category) {
+	public void setCategory(String category) {
 		Category = category;
 	}
 
