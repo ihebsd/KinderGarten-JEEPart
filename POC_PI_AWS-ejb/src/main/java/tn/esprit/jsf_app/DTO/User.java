@@ -20,6 +20,8 @@ public class User implements Serializable {
 	private boolean IsEmailVerified;
 	private String ResetPasswordCode;
 	public String ActivationCode ;
+	private static final long serialVersionUID = 1L;
+
 	public String getActivationCode() {
 		return ActivationCode;
 	}
@@ -133,11 +135,23 @@ public class User implements Serializable {
 		super();
 	}
 
+	public User(String email) {
+		super();
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
 		return "User [idUser=" + idUser + ", nom=" + nom + ", prenom=" + prenom + ", login=" + login + ", email="
 				+ email + ", password=" + password + ", role=" + role + ", Confirmpassword=" + Confirmpassword
 				+ ", IsEmailVerified=" + IsEmailVerified + ", ResetPasswordCode=" + ResetPasswordCode + "]";
+	}
+
+	public User(String password, String confirmpassword, String resetPasswordCode) {
+		super();
+		this.password = password;
+		Confirmpassword = confirmpassword;
+		ResetPasswordCode = resetPasswordCode;
 	}
 	
 	

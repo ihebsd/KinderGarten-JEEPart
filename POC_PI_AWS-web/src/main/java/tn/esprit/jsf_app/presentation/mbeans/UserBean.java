@@ -2,10 +2,13 @@ package tn.esprit.jsf_app.presentation.mbeans;
 
 import javax.faces.bean.ManagedBean;
 
+import org.jboss.resteasy.util.GetRestful;
+
 import tn.esprit.jsf_app.DTO.KinderGarten;
 import tn.esprit.jsf_app.DTO.User;
 import tn.esprit.jsf_app.DTO.role;
 import tn.esprit.jsf_app.services.UserService;
+import tn.esprit.utilities.UserGet;
 
 @ManagedBean
 public class UserBean {
@@ -108,10 +111,9 @@ public class UserBean {
 		}
 		// user static
 		User.setConnectedUser(user);
-		
+
 		return "/KinderGarten/KinderGarten?faces-redirect=true";
 	}
-
 
 	public String DoRegister() {
 		User u = new User(nom, prenom, login, email, password, role, Confirmpassword);
@@ -120,23 +122,21 @@ public class UserBean {
 		return "/Login/Login?faces-redirect=true";
 
 	}
-	Boolean t=true;
-	public Boolean getT() {
-		return t;
+
+	public String ForgotPassword() {
+		User u = new User(email);
+		userService.ForgotPassword(u);
+
+		return "/Login/Login?faces-redirect=true";
+
 	}
 
-	public void setT(Boolean t) {
-		this.t = t;
-	}
+	public String ResetPassword() {
+		User u = new User(password, Confirmpassword, UserGet.getResetcode());
+		userService.ResetPassword(u);
+		UserGet.setResetcode("");
+		return "/Login/Login?faces-redirect=true";
 
-	public Boolean VerifyAccount() {
-		Boolean test=userService.VerifyAccount("f497e5f3-b82f-4d15-9af7-f694551f71f4");
-		if(test) {
-			
-			return true;
-		}
-		return false;
 	}
-	
 
 }

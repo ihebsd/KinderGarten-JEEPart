@@ -133,7 +133,6 @@ public class KinderGartenBean {
 
 	public String addKinderGarten() {
 		 int Us=User.getConnectedUser().getIdUser();
-		 System.out.println("alaaaaaah"+new KinderGarten(Name,Description,Address,Cost,Phone,Image,NbrEmp,Us));
 		K.Create(new KinderGarten(Name,Description,Address,Cost,Phone,Image,NbrEmp,Us));
 
 		return "/KinderGarten/KinderGarten?faces-redirect=true";
