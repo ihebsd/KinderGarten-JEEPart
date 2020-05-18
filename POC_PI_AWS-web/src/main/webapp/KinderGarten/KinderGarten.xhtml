@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/Template.xhtml" xmlns:p="http://primefaces.org/ui">
+
+
+	<ui:param name="page_name" value="KinderGartens" />
+	<ui:define name="body">
+		<h:form>
+			<ul class="filter">
+
+
+
+
+				<c:forEach items="#{kinderGartenBean.kinderGartens}" var="k"
+					varStatus="metadata">
+
+					<div class="row">
+						<div class="col-md-12 wow fadeInUp"
+							style="visibility: visible; animation-name: fadeInUp;">
+							<div class="full_grid mb_50">
+								<div class="events_grid_img">
+									<h:graphicImage value="../Ressources/Uploads/#{k.image}" />
+								</div>
+								<div class="events_one_block">
+									<div class="events_one_block_left tac">
+										<div class="events_one_top b_red">
+											<p class="pb_10">
+												<h:outputText value="#{k.dateCreation}">
+													<f:convertDateTime pattern="EEEE dd " />
+												</h:outputText>
+											</p>
+											<p><h:outputText value="#{k.dateCreation}">
+													<f:convertDateTime pattern=" MMM-yyyy" />
+												</h:outputText></p>
+										</div>
+										<div class="events_one_center b_red_dark">
+											<p class="block_time">
+												<i class="fa fa-phone"><span></span></i><span><h:outputText
+														value=" #{k.phone}" /> </span>
+											</p>
+										</div>
+										<div class="events_one_bottom b_grey_light">
+
+											<p>
+												<i class="fa fa-map-marker"><span></span></i><span><h:outputText
+														value=" #{k.address}" /> </span>
+											</p>
+										</div>
+									</div>
+									<div class="grids_brief ml_250">
+										<h4 class="grids_title t_red">
+											<a
+												href="Details/@Html.DisplayFor(modelItem => item.KinderGartenId)"><span><h:outputText
+														value=" #{k.name}" /> </span></a>
+										</h4>
+										<p class="grids_description t_grey">
+											<span><h:outputText value=" #{k.description}" /> </span>
+										</p>
+
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</c:forEach>
+			</ul>
+		</h:form>
+	</ui:define>
+</ui:composition>

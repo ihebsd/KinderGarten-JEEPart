@@ -4,15 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class KinderGarten implements Serializable {
-	public int KinderGartenId;
-	public String Name;
-	public String Description;
-	public String Address;
-	public float Cost;
-	public int Phone;
-	public Date DateCreation;
-	public String Image;
-	public int NbrEmp;
+	private int KinderGartenId;
+	private String Name;
+	private String Description;
+	private String Address;
+	private float Cost;
+	private int Phone;
+	private Date DateCreation;
+	private String Image;
+	private int NbrEmp;
+	private int DirecteurId;
 	private static final long serialVersionUID = 1L;
 	public KinderGarten() {
 		super();
@@ -71,11 +72,19 @@ public class KinderGarten implements Serializable {
 	public void setNbrEmp(int nbrEmp) {
 		NbrEmp = nbrEmp;
 	}
+	
+	public int getDirecteurId() {
+		return DirecteurId;
+	}
+	public void setDirecteurId(int directeurId) {
+		DirecteurId = directeurId;
+	}
+	
 	@Override
 	public String toString() {
 		return "KinderGarten [KinderGartenId=" + KinderGartenId + ", Name=" + Name + ", Description=" + Description
 				+ ", Address=" + Address + ", Cost=" + Cost + ", Phone=" + Phone + ", DateCreation=" + DateCreation
-				+ ", Image=" + Image + ", NbrEmp=" + NbrEmp + "]";
+				+ ", Image=" + Image + ", NbrEmp=" + NbrEmp + ", DirecteurId=" + DirecteurId + "]";
 	}
 	public KinderGarten(int kinderGartenId, String name, String description, String address, float cost, int phone,
 			Date dateCreation, String image, int nbrEmp) {
@@ -90,17 +99,18 @@ public class KinderGarten implements Serializable {
 		Image = image;
 		NbrEmp = nbrEmp;
 	}
-	public KinderGarten(String name, String description, String address, float cost, int phone, Date dateCreation,
-			String image, int nbrEmp) {
+	public KinderGarten(String name, String description, String address, float cost, int phone, String image,
+			int nbrEmp, int directeurId) {
 		super();
 		Name = name;
 		Description = description;
 		Address = address;
 		Cost = cost;
 		Phone = phone;
-		DateCreation = dateCreation;
 		Image = image;
 		NbrEmp = nbrEmp;
+		DirecteurId = directeurId;
 	}
-
+	
+	
 }

@@ -29,14 +29,14 @@ import tn.esprit.jsf_app.interfaces.KinderGartenServiceRemote;
 @Stateful
 @LocalBean
 public class KinderGartenService implements KinderGartenServiceRemote {
-	public String GlobalEndPoint = "localhost:4640";
+	public String GlobalEndPoint = "localhost:44326";
 	EntityManager em ;
 	@Override
 	public List<KinderGarten> GetAll() {
 		List<KinderGarten>  lasp = new ArrayList<KinderGarten>();
     	Client client = ClientBuilder.newClient();
     	
-    	WebTarget web = client.target("https://"+GlobalEndPoint+"/api/EventWebApi/"); 
+    	WebTarget web = client.target("http://"+GlobalEndPoint+"/api/KinderGarten"); 
     	
     	Response response = web.request().get();
     	
@@ -44,6 +44,7 @@ public class KinderGartenService implements KinderGartenServiceRemote {
     	
     	JsonReader jsonReader = Json.createReader(new StringReader(result));
     	JsonArray object =  jsonReader.readArray();
+    	
     	
     	 
     	for (int i=0;i<object.size();i++)
@@ -55,15 +56,15 @@ public class KinderGartenService implements KinderGartenServiceRemote {
     	 m.setImage(object.getJsonObject(i).getString("Image")); 
     	 m.setAddress(object.getJsonObject(i).getString("Address")); 
     	 m.setDescription(object.getJsonObject(i).getString("Description"));
-    	 DateFormat format = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH);
+    	 DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");;
     	 try {
-			m.setDateCreation(format.parse(object.getJsonObject(i).getString("DateEvent")));
+			m.setDateCreation(format.parse(object.getJsonObject(i).getString("DateCreation")));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-    	m.setCost(Float.valueOf(object.getJsonObject(i).getString("Cost")));
-    	m.setNbrEmp(Integer.valueOf(object.getJsonObject(i).getString("NbrEmp")));
-    	m.setPhone(Integer.valueOf(object.getJsonObject(i).getString("Phone")));
+    	m.setCost(object.getJsonObject(i).getInt("Cost"));
+    	m.setNbrEmp(object.getJsonObject(i).getInt("NbrEmp"));
+    	m.setPhone(object.getJsonObject(i).getInt("Phone"));
     	
     	 lasp.add(m);
     	}
@@ -84,9 +85,8 @@ return lasp;
 	@Override
 	public void Create(KinderGarten p) {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("https://"+GlobalEndPoint+"/api/KinderGarten/Create");
+		WebTarget target = client.target("http://"+GlobalEndPoint+"/api/KinderGarten/Create");
 		WebTarget hello =target.path("");
-		
 		Response response =hello.request().post(Entity.entity(p, MediaType.APPLICATION_JSON) );
 		
 		
@@ -101,15 +101,15 @@ return lasp;
 	@Override
 	public void Update(int id, KinderGarten p) {
 		KinderGarten e = new KinderGarten();
-		e.setKinderGartenId(p.KinderGartenId);
-		e.setName(p.Name);
-		e.setImage(p.Image);
-		e.setCost(p.Cost);
-		e.setDescription(p.Description);
-       e.setDateCreation(p.DateCreation);
-       e.setPhone(p.Phone);
-       e.setNbrEmp(p.NbrEmp);
-       e.setAddress(p.Address);
+		e.setKinderGartenId(p.getKinderGartenId());
+		e.setName(p.getName());
+		e.setImage(p.getImage());
+		e.setCost(p.getCost());
+		e.setDescription(p.getDescription());
+       e.setDateCreation(p.getDateCreation());
+       e.setPhone(p.getPhone());
+       e.setNbrEmp(p.getNbrEmp());
+       e.setAddress(p.getAddress());
 
         
   		System.out.println("iddddddddd"+id);
