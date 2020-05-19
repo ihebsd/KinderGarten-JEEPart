@@ -8,7 +8,7 @@
 
 	<h:outputScript library="javax.faces" name="jsf.js" target="head" />
 
-	<ui:param name="page_name" value="Create" />
+	<ui:param name="page_name" value="Update KinderGarten" />
 	<ui:define name="body">
 		<h:form>
 			<li class="nav-item active"><h:commandLink
@@ -76,9 +76,9 @@
 
 											<f:passThroughAttribute name="accept" value="image/png" />
 											<f:ajax listener="#{kinderGartenBean.doUpload()}"
-												render="hsine" />
+												render="@form" />
 											<f:ajax listener="#{kinderGartenBean.doUpload1()}"
-												render="hsine" />
+												render="@form" />
 
 										</h:inputFile>
 									</div>
@@ -95,7 +95,7 @@
 
 
 
-							<h:commandButton action="#{kinderGartenBean.addKinderGarten}"
+							<h:commandButton action="#{kinderGartenBean.PutKinder}"
 								value="Create KinderGarten"
 								styleClass="btn btn-primary pull-center" id="hsine" />
 							<div class="clearfix"></div>

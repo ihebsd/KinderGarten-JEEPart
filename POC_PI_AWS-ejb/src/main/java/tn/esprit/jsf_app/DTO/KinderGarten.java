@@ -111,6 +111,18 @@ public class KinderGarten implements Serializable {
 		NbrEmp = nbrEmp;
 		DirecteurId = directeurId;
 	}
+	public KinderGarten(int kinderGartenId, String name, String description, String address, float cost, int phone,
+			String image, int nbrEmp) {
+		super();
+		KinderGartenId = kinderGartenId;
+		Name = name;
+		Description = description;
+		Address = address;
+		Cost = cost;
+		Phone = phone;
+		Image = image;
+		NbrEmp = nbrEmp;
+	}
 	
 	
 }

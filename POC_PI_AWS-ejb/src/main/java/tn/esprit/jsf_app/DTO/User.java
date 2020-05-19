@@ -139,7 +139,13 @@ public class User implements Serializable {
 		super();
 		this.email = email;
 	}
-
+	public User(String password, String confirmpassword, String resetPasswordCode) {
+		super();
+		this.password = password;
+		Confirmpassword = confirmpassword;
+		ResetPasswordCode = resetPasswordCode;
+	}
+	
 	@Override
 	public String toString() {
 		return "User [idUser=" + idUser + ", nom=" + nom + ", prenom=" + prenom + ", login=" + login + ", email="
@@ -147,12 +153,6 @@ public class User implements Serializable {
 				+ ", IsEmailVerified=" + IsEmailVerified + ", ResetPasswordCode=" + ResetPasswordCode + "]";
 	}
 
-	public User(String password, String confirmpassword, String resetPasswordCode) {
-		super();
-		this.password = password;
-		Confirmpassword = confirmpassword;
-		ResetPasswordCode = resetPasswordCode;
-	}
 	
 	
 }

@@ -8,17 +8,17 @@ import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-
+import javax.faces.bean.SessionScoped;
 import javax.servlet.http.Part;
-
-
 
 import tn.esprit.jsf_app.DTO.KinderGarten;
 import tn.esprit.jsf_app.DTO.User;
 import tn.esprit.jsf_app.services.KinderGartenService;
 
 @ManagedBean
+@SessionScoped
 public class KinderGartenBean {
+	int Us = User.getConnectedUser().getIdUser();
 	public int KinderGartenId;
 	public String Name;
 	public String Description;
@@ -31,6 +31,15 @@ public class KinderGartenBean {
 	private List<KinderGarten> KinderGarten;
 	private static final long serialVersionUID = 1L;
 	public KinderGartenService K = new KinderGartenService();
+	private String LO;
+
+	public String getLO() {
+		return LO;
+	}
+
+	public void setLO(String lO) {
+		LO = lO;
+	}
 
 	private Part logo;
 	private boolean upladed;
@@ -39,8 +48,7 @@ public class KinderGartenBean {
 
 		try {
 			InputStream in = logo.getInputStream();
-			Image= logo.getSubmittedFileName();
-
+			Image = logo.getSubmittedFileName();
 			File f = new File("C:\\Users\\Hsine\\Desktop\\KinderGarten2\\KinderGarten\\Solution.Web\\Content\\Uploads\\"
 					+ logo.getSubmittedFileName());
 			System.out.println("hsiiiiiine" + f.getAbsolutePath());
@@ -71,7 +79,6 @@ public class KinderGartenBean {
 			File f = new File(
 					"C:\\Work\\PI-JEE\\KinderGarten-JEEPart\\POC_PI_AWS-web\\src\\main\\webapp\\Ressources\\Uploads\\"
 							+ logo.getSubmittedFileName());
-			System.out.println("hsiiiiiine" + f.getAbsolutePath());
 			f.createNewFile();
 			FileOutputStream out = new FileOutputStream(f);
 
@@ -124,38 +131,6 @@ public class KinderGartenBean {
 		return KinderGarten;
 	}
 
-	public String supprimer(KinderGarten e) {
-		K.Delete(e);
-		return "KinderGarten.jsf";
-
-	}
-	
-
-	public String addKinderGarten() {
-		 int Us=User.getConnectedUser().getIdUser();
-		K.Create(new KinderGarten(Name,Description,Address,Cost,Phone,Image,NbrEmp,Us));
-
-		return "/KinderGarten/KinderGarten?faces-redirect=true";
-
-	}
-
-	public String modifier(KinderGarten e) throws IOException {
-
-		this.setKinderGartenId(e.getKinderGartenId());
-		this.setName(e.getName());
-		this.setImage(e.getImage());
-		this.setCost(e.getCost());
-		this.setDescription(e.getDescription());
-		this.setDateCreation(e.getDateCreation());
-		this.setAddress(e.getAddress());
-		this.setPhone(e.getPhone());
-		this.setNbrEmp(e.getNbrEmp());
-		System.out.println(e.getKinderGartenId());
-
-		return "Edit.jsf";
-
-	}
-
 	public String getName() {
 		return Name;
 	}
@@ -204,8 +179,6 @@ public class KinderGartenBean {
 		DateCreation = dateCreation;
 	}
 
-	
-
 	public static String getImage() {
 		return Image;
 	}
@@ -226,5 +199,62 @@ public class KinderGartenBean {
 		KinderGartenId = kinderGartenId;
 	}
 
+	public String supprimer(KinderGarten k) {
+		K.Delete(k);
+		return "/KinderGarten/KinderGarten?faces-redirect=true";
+	}
+
+	public String addKinderGarten() {
+
+		K.Create(new KinderGarten(Name, Description, Address, Cost, Phone, Image, NbrEmp, Us));
+
+		return "/KinderGarten/KinderGarten?faces-redirect=true";
+
+	}
+
+	public String modifier(KinderGarten e) throws IOException {
+
+		this.setKinderGartenId(e.getKinderGartenId());
+		this.setName(e.getName());
+		this.setCost(e.getCost());
+		this.setDescription(e.getDescription());
+		this.setAddress(e.getAddress());
+		this.setPhone(e.getPhone());
+		this.setNbrEmp(e.getNbrEmp());
+		this.setDateCreation(e.getDateCreation());
+		this.setImage(e.getImage());
+		
+		
+
+		return "/KinderGarten/Edit?faces-redirect=true";
+
+	}
+	public String Details(KinderGarten e) throws IOException {
+
+		this.setKinderGartenId(e.getKinderGartenId());
+		this.setName(e.getName());
+		this.setCost(e.getCost());
+		this.setDescription(e.getDescription());
+		this.setAddress(e.getAddress());
+		this.setPhone(e.getPhone());
+		this.setNbrEmp(e.getNbrEmp());
+		this.setDateCreation(e.getDateCreation());
+		this.setLO(e.getImage());
+		System.out.println("yezzi"+LO);
+		
+		
+
+		return "/KinderGarten/Details?faces-redirect=true";
+
+	}
+
+	public String PutKinder() throws InterruptedException {
+
+		K.Update( KinderGartenId,new KinderGarten(KinderGartenId,Name, Description, Address, Cost, Phone, Image, NbrEmp));
+		
+		
+
+		return "/KinderGarten/KinderGarten?faces-redirect=true";
+	}
 
 }

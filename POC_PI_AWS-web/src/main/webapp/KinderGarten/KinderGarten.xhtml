@@ -34,9 +34,11 @@
 													<f:convertDateTime pattern="EEEE dd " />
 												</h:outputText>
 											</p>
-											<p><h:outputText value="#{k.dateCreation}">
+											<p>
+												<h:outputText value="#{k.dateCreation}">
 													<f:convertDateTime pattern=" MMM-yyyy" />
-												</h:outputText></p>
+												</h:outputText>
+											</p>
 										</div>
 										<div class="events_one_center b_red_dark">
 											<p class="block_time">
@@ -54,14 +56,17 @@
 									</div>
 									<div class="grids_brief ml_250">
 										<h4 class="grids_title t_red">
-											<a
-												href="Details/@Html.DisplayFor(modelItem => item.KinderGartenId)"><span><h:outputText
-														value=" #{k.name}" /> </span></a>
+											<h:commandLink 
+												action="#{kinderGartenBean.Details(k)}"><span><h:outputText
+														value=" #{k.name}" /> </span></h:commandLink >
 										</h4>
 										<p class="grids_description t_grey">
 											<span><h:outputText value=" #{k.description}" /> </span>
 										</p>
-
+										<h:commandButton action="#{kinderGartenBean.modifier(k)}"
+											value="Update" styleClass="btn btn-primary pull-center" />
+										<h:commandButton action="#{kinderGartenBean.supprimer(k)}"
+											value="Delete" styleClass="btn" />
 
 
 									</div>
