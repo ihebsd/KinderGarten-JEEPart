@@ -3,14 +3,14 @@ package tn.esprit.jsf_app.DTO;
 import java.io.Serializable;
 import java.lang.String;
 import java.util.Date;
-import tn.esprit.jsf_app.DTO.Category;
+import tn.esprit.jsf_app.DTO.category;
 
 public class Event implements Serializable {
 	
 	public int EventId;
 	public String Name; 
 	public String image;
-	public String Category;
+	public category Category;
 	public int number_P ;
 	public String DateEvent;
 	public String HeureD;
@@ -39,10 +39,10 @@ public class Event implements Serializable {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getCategory() {
+	public category getCategory() {
 		return Category;
 	}
-	public void setCategory(String category) {
+	public void setCategory(category category) {
 		Category = category;
 	}
 	
@@ -83,30 +83,25 @@ public class Event implements Serializable {
 		return "Event [EventId=" + EventId + ", Name=" + Name + ", Picture=" + image + ", Theme=" + Category
 				+ ", Description=" + Description + ", DateEvent=" + DateEvent + ", HeureDebut=" + HeureD + ", HeureDebut=" + HeureD + "]";
 	}
-	public Event( String name, String image, String Category, String Description, String DateEvent, String HeureD, String HeureF) {
+	public Event(String name, String image, category category, int number_P, String dateEvent, String heureD,
+			String heureF, String description) {
 		
-		Name = name;
-		image = image;
-		Category = Category;
-		Description = Description;
-		DateEvent = DateEvent;
-		HeureF = HeureF;
-		HeureD = HeureD;
-	}
-	public Event(int eventId, String name, String image, String Category, String Description, String DateEvent, String HeureD, String HeureF) {
 		super();
-		
-		EventId = eventId;
 		Name = name;
-		image = image;
-		Category = Category;
-		Description = Description;
-		DateEvent = DateEvent;
-		HeureF = HeureF;
-		HeureD = HeureD;
-		
-		
+		this.image = image;
+		Category = category;
+		this.number_P = number_P;
+		DateEvent = dateEvent;
+		HeureD = heureD;
+		HeureF = heureF;
+		Description = description;
 	}
+	
+
+	
+	
+		
+	
 	 
       
    

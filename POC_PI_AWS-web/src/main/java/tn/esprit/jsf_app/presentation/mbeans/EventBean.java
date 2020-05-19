@@ -4,16 +4,19 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 import tn.esprit.jsf_app.DTO.*;
 import tn.esprit.jsf_app.services.EventService;
 
 @ManagedBean
+@SessionScoped
 public class EventBean {
 
 	public int EventId;
 	public String Name;
 	public String image;
-	public String Category;
+	public category Category;
 	public int number_P;
 	public String DateEvent;
 	public String HeureD;
@@ -23,12 +26,13 @@ public class EventBean {
 	private static final long serialVersionUID = 1L;
 
 	EventService E = new EventService();
-	
+
 	public int getEventId() {
 		return EventId;
 	}
 
 	public List<Event> getEvent() {
+		Event =E.GetAll();
 		return Event;
 	}
 
@@ -42,20 +46,18 @@ public class EventBean {
 	}
 
 	public String supprimer(Event e) {
+		System.out.println("aaaaaaaa");
 		E.Delete(e);
+		
 		return "Event.jsf";
 
 	}
 
-	public String addEvent()  {
-		E.Create(new Event(Name, image,
-		 Category,
-		 Description,
-		 DateEvent,
-		 HeureD,
-		 HeureF	 
-		 ));
+	public String addEvent() {
+		E.Create(new Event(Name, image, Category, number_P, DateEvent, HeureD, HeureF, Description));
 		return "Event.jsf";
+		
+	
 
 	}
 
@@ -64,7 +66,6 @@ public class EventBean {
 		this.setEventId(e.getEventId());
 		this.setName(e.getName());
 		this.setImage(e.getImage());
-		this.setCategory(e.getCategory());
 		this.setDescription(e.getDescription());
 		this.setDateEvent(e.getDateEvent());
 		this.setHeureD(e.getHeureD());
@@ -78,7 +79,7 @@ public class EventBean {
 
 	public String MAJEvent() {
 
-		E.Update(EventId, new Event(Name, image,Category, Description, DateEvent, HeureD, HeureF ));
+		//E.Update(EventId, new Event(Name, image, Category, Description, HeureD, HeureF, number_P));
 		Event = E.GetAll();
 
 		return "Event.jsf";
@@ -104,11 +105,11 @@ public class EventBean {
 		this.image = image;
 	}
 
-	public String getCategory() {
+	public category getCategory() {
 		return Category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(category category) {
 		Category = category;
 	}
 

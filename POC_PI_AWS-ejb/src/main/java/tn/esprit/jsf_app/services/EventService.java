@@ -27,7 +27,8 @@ import tn.esprit.jsf_app.interfaces.EventServiceRemote;
 @LocalBean
 public class EventService implements EventServiceRemote {
 	
-	public String GlobalEndPoint = "localhost:4640";
+	public String GlobalEndPoint = "localhost:44326"; 
+	//https://localhost:44326/4640
 	EntityManager em ;
 	@Override
 	public List<Event> GetAll() {
@@ -45,7 +46,7 @@ public class EventService implements EventServiceRemote {
 		List<Event>  lasp = new ArrayList<Event>();
     	Client client = ClientBuilder.newClient();
     	
-    	WebTarget web = client.target("http://"+GlobalEndPoint+"/api/EventWebApi/"); 
+    	WebTarget web = client.target("http://localhost:44326/Api/EventWebApi"); 
     	
     	Response response = web.request().get();
     	
@@ -63,13 +64,13 @@ public class EventService implements EventServiceRemote {
     	 //String dateString;
        	 m.setEventId(object.getJsonObject(i).getInt("EventId")); 
     	 m.setName(object.getJsonObject(i).getString("Name")); 
-    	 m.setImage(object.getJsonObject(i).getString("image")); 
-    	 m.setCategory(object.getJsonObject(i).getString("Category")); 
+    	 //m.setImage(object.getJsonObject(i).getString("image")); 
+    	// m.setCategory(object.getJsonObject(i).getString("Category")); 
     	 m.setDescription(object.getJsonObject(i).getString("Description"));
     	 m.setDateEvent(object.getJsonObject(i).getString("DateEvent"));
     	 m.setHeureF(object.getJsonObject(i).getString("HeureF"));
     	 m.setHeureD(object.getJsonObject(i).getString("HeureD"));
-    	 m.setNumber_P(object.getJsonObject(i).getInt("Number_P"));
+    	 m.setNumber_P(object.getJsonObject(i).getInt("number_P"));
 
     	
     	 lasp.add(m);
@@ -85,7 +86,7 @@ return lasp;
 	public void Create(Event p) {
 		
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://"+GlobalEndPoint+"/api/Create");
+		WebTarget target = client.target("http://"+GlobalEndPoint+"/api/EventPost");
 		WebTarget hello =target.path("");
 		
 		Response response =hello.request().post(Entity.entity(p, MediaType.APPLICATION_JSON) );
