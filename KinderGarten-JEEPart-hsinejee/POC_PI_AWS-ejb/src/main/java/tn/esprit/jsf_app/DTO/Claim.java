@@ -17,7 +17,7 @@ public class Claim implements Serializable {
 
 	public Claim() {
 		super();
-	}
+	} 
 
 	public int getComplaintId() {
 		return ComplaintId;
