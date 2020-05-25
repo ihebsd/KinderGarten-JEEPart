@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/Template.xhtml" xmlns:p="http://primefaces.org/ui">
+
+
+	<ui:param name="page_name" value="Login" />
+	<ui:define name="body">
+		<section id="authorization_page" class="authorization_page">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-1"></div>
+					<div class="col-md-10 dot">
+						<h2 class="section-title">Register</h2>
+						<p class="section-description">
+							Already have an account? - <a href="/Login/Login">Log In</a>
+						</p>
+					</div>
+					<div class="col-md-1"></div>
+				</div>
+				<h:form>
+
+					<div class="row">
+						<div class="col-md-12">
+
+
+							<div class="reg_box">
+								<h:inputText value="#{userBean.prenom}" pt:placeholder="Name"
+									styleClass="form-control" />
+								<h:inputText value="#{userBean.nom}" pt:placeholder="LastName"
+									styleClass="form-control" />
+								<h:inputText value="#{userBean.login}" pt:placeholder="Username"
+									styleClass="form-control" />
+
+								<DIV ALIGN="CENTER">
+									<h:selectOneMenu value="#{userBean.role}">
+										<f:selectItem itemLabel="Manager" itemValue="Manager" />
+										<f:selectItem itemLabel="Directeur" itemValue="Directeur" />
+										<f:selectItem itemLabel="Parent" itemValue="Parent" />
+										<f:selectItem itemLabel="Prospect" itemValue="Prospect" />
+										<f:selectItem itemLabel="Docteur" itemValue="Docteur" />
+
+									</h:selectOneMenu>
+								</DIV>
+								<br />
+								<h:inputText value="#{userBean.email}" pt:placeholder="Email"
+									styleClass="form-control" />
+								<h:inputSecret value="#{userBean.password}"
+									pt:placeholder="Password" styleClass="form-control" />
+								<h:inputSecret value="#{userBean.confirmpassword}"
+									pt:placeholder="ConfirmPassword" styleClass="form-control" />
+
+
+
+							</div>
+							<div class="reg_checkbox">
+								<input type="checkbox" class="checkbox" id="checkbox" /> <label
+									for="checkbox"></label> <span>I agree to the <a href="#">Terms
+										of service</a></span>
+							</div>
+
+							<h:commandButton action="#{userBean.DoRegister}" value="Register"
+								styleClass="btn btn-primary pull-center" />
+
+
+						</div>
+					</div>
+				</h:form>
+
+			</div>
+
+		</section>
+
+
+
+
+	</ui:define>
+</ui:composition>
