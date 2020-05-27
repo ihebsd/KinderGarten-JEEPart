@@ -31,6 +31,10 @@ public class ClaimService implements ClaimServiceRemote {
 	public String GlobalEndPoint = "localhost:44326";
 	EntityManager em ;
 	
+	public ClaimService() {
+		
+		// TODO Auto-generated constructor stub
+	}
 	@Override
 	public List<Claim> GetAll() {
 		List<Claim> lasp = new ArrayList<Claim>();
@@ -59,12 +63,12 @@ public class ClaimService implements ClaimServiceRemote {
 				e.printStackTrace();
 			}
 			m.setClaimType(object.getJsonObject(i).getString("ClaimType"));
-			m.setStatus(object.getJsonObject(i).getString("Status"));
+			m.setStatus(object.getJsonObject(i).getString("status"));
 		
 
 			lasp.add(m);
 		}
-
+		System.out.println("icii method");
 		return lasp;
 	}
 	@Override

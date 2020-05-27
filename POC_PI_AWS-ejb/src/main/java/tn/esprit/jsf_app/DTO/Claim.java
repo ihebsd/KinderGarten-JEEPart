@@ -67,6 +67,14 @@ public class Claim implements Serializable {
 		Status = status;
 	}
 
+	public Claim(int complaintId, String name, String description, String claimType) {
+		super();
+		ComplaintId = complaintId;
+		Name = name;
+		Description = description;
+		ClaimType = claimType;
+	}
+
 	@Override
 	public String toString() {
 		return "Claim [ComplaintId=" + ComplaintId + ", Name=" + Name + ", Description=" + Description + ", ClaimDate="
@@ -81,6 +89,13 @@ public class Claim implements Serializable {
 		ClaimDate = claimDate;
 		ClaimType = claimType;
 		Status = status;
+	}
+
+	public Claim(String name, String description, String claimType) {
+		super();
+		Name = name;
+		Description = description;
+		ClaimType = claimType;
 	}
 
 	public Claim(String name, String description, Date claimDate, String claimType, String status) {

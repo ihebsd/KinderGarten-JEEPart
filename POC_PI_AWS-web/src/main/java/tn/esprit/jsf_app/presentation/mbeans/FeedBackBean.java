@@ -67,8 +67,18 @@ public class FeedBackBean {
 
 		Cs.Create(new FeedBack(Description, FeedBackDate, sentiment));
 
-		return "/FeedBack/FeedBack?faces-redirect=true";
+		return "/FeedBack/AddClaim?faces-redirect=true";
 
+	}
+
+	public List<FeedBack> getFeedBacks() {
+		FeedBacks=Cs.GetAll();
+		System.out.println("feed"+Cs.GetAll());
+		return FeedBacks;
+	}
+
+	public void setFeedBacks(List<FeedBack> feedBacks) {
+		FeedBacks = feedBacks;
 	}
 
 	public String modifier(FeedBack e) throws IOException {

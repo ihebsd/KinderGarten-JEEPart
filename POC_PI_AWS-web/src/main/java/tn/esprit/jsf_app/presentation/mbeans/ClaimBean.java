@@ -1,9 +1,11 @@
 package tn.esprit.jsf_app.presentation.mbeans;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -16,16 +18,22 @@ import tn.esprit.jsf_app.services.KinderGartenService;
 @ManagedBean
 @SessionScoped
 public class ClaimBean {
-	int Us = User.getConnectedUser().getIdUser();
+	//int Us = User.getConnectedUser().getIdUser();
 	public int ComplaintId;
 	public String Name;
 	public String Description;
 	public Date ClaimDate;
 	public String ClaimType;
 	public String Status;
-	private List<Claim> Claims;
+	private List<Claim> Claims ;
 	private static final long serialVersionUID = 1L;
-	public ClaimService Cs = new ClaimService();
+	@EJB
+	public ClaimService Cs;
+
+	public ClaimBean() {
+		
+		// TODO Auto-generated constructor stub
+	}
 
 	public int getComplaintId() {
 		return ComplaintId;
@@ -77,14 +85,29 @@ public class ClaimBean {
 
 	public String supprimer(Claim C) {
 		Cs.Delete(C);
-		return "/Claim/Claim?faces-redirect=true";
+		return "/Claim/Claims?faces-redirect=true";
 	}
+	
+	public String getClaim() {
+		return "Claims.jsf";
+	}
+	public List<Claim> getClaims() {
+
+		Claims=Cs.GetAll();
+		System.out.println("ICII"+Cs.GetAll());
+		return Claims;
+	}
+
+	public void setClaims(List<Claim> claims) {
+		Claims = claims;
+	}
+
 
 	public String addClaim() {
 
-		Cs.Create(new Claim(Name, Description, ClaimDate, ClaimType, Status));
+		Cs.Create(new Claim(Name, Description,ClaimType));
 
-		return "/Claim/Claim?faces-redirect=true";
+		return "/Claim/AddClaim?faces-redirect=true";
 
 	}
 
@@ -114,4 +137,5 @@ public class ClaimBean {
 
 	}
 
+	
 }
