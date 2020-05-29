@@ -251,8 +251,6 @@ public class KinderGartenBean {
 	public String PutKinder() throws InterruptedException {
 
 		K.Update( KinderGartenId,new KinderGarten(KinderGartenId,Name, Description, Address, Cost, Phone, Image, NbrEmp));
-		
-		
 
 		return "/KinderGarten/KinderGarten?faces-redirect=true";
 	}

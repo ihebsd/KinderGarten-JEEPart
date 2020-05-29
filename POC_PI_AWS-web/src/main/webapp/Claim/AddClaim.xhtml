@@ -1,21 +1,22 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
-	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	template="/Back/Template.xhtml" xmlns:p="http://primefaces.org/ui">
 
-	<ui:param name="page_name" value="Add Claim" />
+	<h:outputScript library="javax.faces" name="jsf.js" target="head" />
+
+	<ui:param name="page_name" value="Create" />
 	<ui:define name="body">
 		<section id="authorization_page" class="authorization_page">
 
-			<div class="container">  
+			<div class="container">
 
 				<div class="row">
 
-					<div class="col-md-12">    
+					<div class="col-md-12">
 
 
 						<h:form enctype="multipart/form-data">
@@ -24,8 +25,8 @@
 								<DIV ALIGN="CENTER">
 									<h3>Name</h3>
 								</DIV>
-								<h:inputText value="#{claimBean.name}" pt:placeholder="Name"
-									styleClass="form-control" />
+								<h:inputText value="#{claimBean.name}"
+									pt:placeholder="Name" styleClass="form-control" />
 
 
 								<DIV ALIGN="CENTER">
@@ -35,23 +36,21 @@
 									pt:placeholder="Description" styleClass="form-control" />
 
 								<DIV ALIGN="CENTER">
-									<h3>Address</h3>
+									<h3>ClaimType</h3>
 								</DIV>
-								<h:inputText value="#{claimBean.claimtype}"
-									pt:placeholder="Address" styleClass="form-control" />
+								<h:inputText value="#{claimBean.claimType}"
+									pt:placeholder="ClaimType" styleClass="form-control" />
 
-							</DIV>
+							</div>
+
+							<h:commandButton action="#{claimBean.addClaim}"
+								value="Create Claim"
+								styleClass="btn btn-primary pull-center" id="raslen" />
+							<div class="clearfix"></div>
+
+						</h:form>
+
 					</div>
-
-					<h:commandButton action="#{claimBean.addClaim}"
-						value="Create Claim" styleClass="btn btn-primary pull-center"
-						id="raslen" />
-					<div class="clearfix"></div>
-
-
-					</h:form>
-
-
 				</div>
 			</div>
 

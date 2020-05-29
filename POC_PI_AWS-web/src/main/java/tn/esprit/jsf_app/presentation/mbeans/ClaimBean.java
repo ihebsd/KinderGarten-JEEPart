@@ -27,13 +27,7 @@ public class ClaimBean {
 	public String Status;
 	private List<Claim> Claims ;
 	private static final long serialVersionUID = 1L;
-	@EJB
-	public ClaimService Cs;
-
-	public ClaimBean() {
-		
-		// TODO Auto-generated constructor stub
-	}
+	public ClaimService Cs = new ClaimService();
 
 	public int getComplaintId() {
 		return ComplaintId;
@@ -113,12 +107,9 @@ public class ClaimBean {
 
 	public String modifier(Claim e) throws IOException {
 
-		this.setComplaintId(e.getComplaintId());
 		this.setName(e.getName());
 		this.setDescription(e.getDescription());
-		this.setClaimDate(e.getClaimDate());
 		this.setClaimType(e.getClaimType());
-		this.setStatus(e.getStatus());
 
 		return "/Claim/Edit?faces-redirect=true";
 
@@ -135,6 +126,12 @@ public class ClaimBean {
 
 		return "/Claim/Details?faces-redirect=true";
 
+	}
+	public String PutClaim() throws InterruptedException {
+
+		Cs.Update( ComplaintId,new Claim(Name, Description,ClaimType));
+		
+		return "/Claim/Claims?faces-redirect=true";
 	}
 
 	
