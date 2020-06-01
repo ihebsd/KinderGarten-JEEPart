@@ -86,7 +86,7 @@ return lasp;
 	public void Create(Event p) {
 		
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://"+GlobalEndPoint+"/api/EventPost");
+		WebTarget target = client.target("http://localhost:44326/api/EventPost");
 		WebTarget hello =target.path("");
 		
 		Response response =hello.request().post(Entity.entity(p, MediaType.APPLICATION_JSON) );
@@ -122,7 +122,7 @@ return lasp;
   		System.out.println("OK");
 
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://"+GlobalEndPoint+"/api/Update?id="+id);
+		WebTarget target = client.target("http://"+GlobalEndPoint+"/api/EventApi/Put?id="+id);
 		Response response = target
 		                 .request()
 		                 .put(Entity.entity(e, MediaType.APPLICATION_JSON));

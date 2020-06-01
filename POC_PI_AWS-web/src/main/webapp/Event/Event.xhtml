@@ -8,53 +8,75 @@
 	template="/Back/Template.xhtml" xmlns:p="http://primefaces.org/ui">
 
 
-<ui:param name="page_name" value="Events" />
+	<ui:param name="page_name" value="Events" />
 	<ui:define name="body">
-	<h:form>
-				<ul class="filter">
-	
-      <c:forEach items="#{eventBean.event}" var="e" varStatus="metadata">
+		<h:form>
+			<ul class="filter">
+				<h:commandButton action="/Event/Create?faces-redirect=true"
+					value="Create New Event" styleClass="btn btn-info" />
 
-            <div class="triple_grids">
-                <div class="col-md-4 wow fadeInUp">
-                    <div class="grids_block">
-                        <div class="grids_block_top">
+
+				<c:forEach items="#{eventBean.event}" var="e" varStatus="metadata">
+
+					<div class="triple_grids">
+						<div class="col-md-4 wow fadeInUp">
+							<div class="grids_block">
+								<div class="grids_block_top">
 									<h:graphicImage value="../Ressources/Uploads/#{e.image}" />
 
-                            <img src="@Url.Content(path)" width="50" height="50" />
-                        </div>
-                        <div class="grids_block_center">
-                            <div class="date_events_left b_yellow_light">
-                                <div class="date_middle">
-                                    <p class="pb_10">
-                                    <h:outputText value="#{e.dateEvent}">
+								</div>
+								<div class="grids_block_center">
+									<div class="date_events_left b_yellow_light">
+										<div class="date_middle">
+											<p class="pb_10">
+												<h:outputText value="#{e.dateEvent}">
 													<f:convertDateTime pattern="EEEE dd " />
-												</h:outputText></p>
-                                </div>
-                            </div>
-                            <div class="date_events_right b_green_green_light">
-                                <p class="block_time pb_10"><i class="fa fa-clock-o"><span></span></i><h:outputText
-														value=" #{e.heureD}" /> - <h:outputText
-														value=" #{e.heureF}" /></p>
-                                <p class="block_time normal"> <span> </span> <h1>Category :</h1>  <h:outputText
-														value=" #{e.category}" /> </p>
-                            </div>
-                        </div>
-                        <div class="grids_brief">
-                            <h4 class="grids_title t_green_green_light"><a href="event.html"><h:outputText
-														value=" #{e.name}" /> </a></h4>
-                            <p class="grids_title t_red"><h:outputText
-														value=" #{e.description}" /></p>
-                        </div>                       
-                    </div>
-                </div>
-            </div>
+												</h:outputText>
+											</p>
+										</div>
+									</div>
+									<div class="date_events_right b_green_green_light">
+										<p class="block_time pb_10">
+											<i class="fa fa-clock-o"><span></span></i>
+											<h:outputText value=" #{e.heureD}" />
+											-
+											<h:outputText value=" #{e.heureF}" />
+										</p>
+										<p class="block_time normal">
+											<span> </span>
+										<h1>Category :</h1>
+										<h:outputText value=" #{e.category}" />
+										</p>
+									</div>
+								</div>
+								<div class="grids_brief">
 
 
-        				</c:forEach>        
-							</ul>
-				
-		</h:form>	
-						
+
+									<h4 class="grids_title t_green_green_light">
+										<h:commandLink action="#{eventBean.Details(e)}">
+											<span><h:outputText value=" #{e.name}" /> </span>
+										</h:commandLink>
+									</h4>
+
+
+									<p class="grids_title t_red">
+										<h:outputText value=" #{e.description}" />
+									</p>
+									<h:commandButton action="#{eventBean.modifier(e)}"
+										value="Update" styleClass="btn btn-primary pull-center" />
+									<h:commandButton action="#{eventBean.supprimer(e)}"
+										value="Delete" styleClass="btn" />
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+				</c:forEach>
+			</ul>
+
+		</h:form>
+
 	</ui:define>
 </ui:composition>
