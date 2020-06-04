@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -24,6 +26,7 @@ public class EventBean {
 	public category Category;
 	public int number_P;
 	public String DateEvent;
+	public Date date;
 	public String HeureD;
 	public String HeureF;
 	public String Description;
@@ -142,6 +145,11 @@ public class EventBean {
 	}
 
 	public String addEvent() {
+		System.out.println("aaaaaaaa"+date);
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		DateEvent = format.format(date);
+		System.out.println("aaaaaaaa"+DateEvent);
+
 		E.Create(new Event(Name, image, Category, number_P, DateEvent, HeureD, HeureF, Description));
 		return "/Event/Event?faces-redirect=true";
 		
@@ -155,7 +163,7 @@ public class EventBean {
 		this.setName(e.getName());
 		this.setImage(e.getImage());
 		this.setDescription(e.getDescription());
-		this.setDateEvent(e.getDateEvent());
+		this.setDate(e.getDate());
 		this.setHeureD(e.getHeureD());
 		this.setHeureF(e.getHeureF());
 		this.setNumber_P(e.getNumber_P());
@@ -192,11 +200,9 @@ public class EventBean {
 	}*/
 	
 	public String PutEvent()  {
-
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		DateEvent = format.format(date);
 		E.Update( EventId,new Event(Name, image, Category, number_P, DateEvent, HeureD, HeureF, Description));
-		
-		
-
 		return "/Event/Event?faces-redirect=true";
 	}
 
@@ -258,6 +264,13 @@ public class EventBean {
 
 	public void setHeureF(String heureF) {
 		HeureF = heureF;
+	}
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public String getDescription() {

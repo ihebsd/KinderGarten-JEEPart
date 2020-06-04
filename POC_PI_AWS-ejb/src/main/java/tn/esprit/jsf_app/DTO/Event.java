@@ -13,6 +13,7 @@ public class Event implements Serializable {
 	public category Category;
 	public int number_P ;
 	public String DateEvent;
+	public Date date;
 	public String HeureD;
 	public String HeureF;
 	public String Description;
@@ -69,6 +70,12 @@ public class Event implements Serializable {
 	}
 	public void setHeureF(String heureF) {
 		HeureF = heureF;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	public String getDescription() {
 		return Description;

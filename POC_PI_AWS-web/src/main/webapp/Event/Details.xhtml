@@ -12,12 +12,21 @@
 	<ui:define name="body">
 		<h:form>
 			<div class="blog_block">
-				<h2 class="blog_title"> Event Named : #{eventBean.name}</h2>
+				<h2 class="blog_title">Event Named : #{eventBean.name}</h2>
 				<div class="row blog_info">
 					<div class="col-md-2 col-sm-2 col-xs-12 pr_0">
 						<div class="date">
 							<ul>
-								<li class="number">#{eventBean.dateEvent}</li>
+								<div class="date">
+									<span><h:outputText value="#{eventBean.date}">
+											<f:convertDateTime pattern="dd " />
+										</h:outputText></span>
+									<p>
+										<h:outputText value="#{eventBean.date}">
+											<f:convertDateTime pattern="MMM  " />
+										</h:outputText>
+									</p>
+								</div>
 							</ul>
 						</div>
 					</div>
@@ -33,22 +42,22 @@
 						<div class="tag">
 							<ul>
 								<li class="title">Start Hour - End Hour</li>
-								<li class="description"><a href="#">#{eventBean.heureD}</a>, <a
-									href="#">#{eventBean.heureF}</a></li>
+								<li class="description"><a href="#">#{eventBean.heureD}</a>,
+									<a href="#">#{eventBean.heureF}</a></li>
 							</ul>
 						</div>
 					</div>
-					<H1>Description :</H1>#{eventBean.description}
+					<H1>Description :</H1>
+					#{eventBean.description}
 				</div>
 				<div class="blog_block_img wow fadeIn">
 					<h:graphicImage value="../Ressources/Uploads/#{eventBean.image}" />
 
-					<img src="@Url.Content(path)" width="50" height="50" />
 				</div>
 
 			</div>
-<h:commandLink action="/Event/Event?faces-redirect=true"
-								value="Back to List" styleClass="btn btn-warning" />
+			<h:commandLink action="/Event/Event?faces-redirect=true"
+				value="Back to List" styleClass="btn btn-warning" />
 		</h:form>
 
 	</ui:define>

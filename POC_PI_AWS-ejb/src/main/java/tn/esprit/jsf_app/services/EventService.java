@@ -2,6 +2,7 @@ package tn.esprit.jsf_app.services;
 
 
 import java.io.StringReader;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,10 +65,18 @@ public class EventService implements EventServiceRemote {
     	 //String dateString;
        	 m.setEventId(object.getJsonObject(i).getInt("EventId")); 
     	 m.setName(object.getJsonObject(i).getString("Name")); 
-    	 //m.setImage(object.getJsonObject(i).getString("image")); 
+    	 m.setImage(object.getJsonObject(i).getString("image")); 
     	// m.setCategory(object.getJsonObject(i).getString("Category")); 
     	 m.setDescription(object.getJsonObject(i).getString("Description"));
-    	 m.setDateEvent(object.getJsonObject(i).getString("DateEvent"));
+    	 DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+			;
+			try {
+				m.setDate(format.parse(object.getJsonObject(i).getString("DateEvent")));
+			
+
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
     	 m.setHeureF(object.getJsonObject(i).getString("HeureF"));
     	 m.setHeureD(object.getJsonObject(i).getString("HeureD"));
     	 m.setNumber_P(object.getJsonObject(i).getInt("number_P"));
