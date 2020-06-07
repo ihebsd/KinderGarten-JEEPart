@@ -112,7 +112,7 @@ public class UserBean {
 		// user static
 		User.setConnectedUser(user);
 
-		return "/KinderGarten/KinderGarten?faces-redirect=true";
+		return "/CarPool/Index?faces-redirect=true";
 	}
 
 	public String DoRegister() {

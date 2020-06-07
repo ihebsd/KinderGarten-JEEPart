@@ -1,0 +1,679 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/CarPoolTemplate.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:param name="page_name" value="Index" />
+	<ui:define name="body">
+		<h:form>
+			<ul class="filter">
+
+				<section id="authorization_page" class="authorization_page">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-1"></div>
+
+							<div class="col-md-1"></div>
+						</div>
+
+						<section id="reviews_page" class="reviews_page">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-1"></div>
+									<div class="col-md-10 dot">
+										<h2 class="section-title">Kid Carpool Safety</h2>
+										<p class="section-description">When it comes to arranging
+											carpools for kids, carpool safety should always be at the top
+											of your list. At GoKid, car safety for kids is one of our top
+											priorities, and we’ve even designed our app to maximize your
+											child’s safety during each and every carpool.</p>
+										<div class="leave_review">
+											<a href="#contact_us" class="button scrollpage">Leave a
+												Review</a>
+										</div>
+									</div>
+									<div class="col-md-1"></div>
+								</div>
+							</div>
+						</section>
+
+						<div id="reviews_content"
+							class="section-block-page reviews_content">
+							<div class="container" id="container">
+								<div class="row">
+									<div class="col-md-12 pb_40">
+
+
+										<ul class="filter" id="myBtnContainer">
+											<li class="active">All</li>
+											<li><a href="javascript:void(0)"
+												onclick="filterSelection('fruits')"> Daily</a></li>
+											<li><a href="javascript:void(0)"
+												onclick="filterSelection('animals')"> Weekly</a></li>
+											<li><a href="javascript:void(0)"
+												onclick="filterSelection('cars')"> EveryWeekDay</a></li>
+											<li><a href="javascript:void(0)"
+												onclick="filterSelection('colors')"> Others</a></li>
+											<li></li>
+										</ul>
+									</div>
+
+
+
+								</div>
+							</div>
+							<div class="row" id="daily">
+								<c:forEach items="#{carPoolBean.carPool}" var="e"
+									varStatus="metadata">
+
+
+									<c:if test="#{e.daily and carPoolBean.test(e)}">
+										<div class="filterDiv fruits">
+											<div class="col-md-8 contact_link">
+												<div class="row review_comment comment_red">
+													<div class="comment_grid">
+														<div
+															class="col-md-12 year_c reviews_block comment_grid_item">
+															<div class="author_block"
+																style="background-color: crimson">
+																<div class="shop_block_img">
+																	<a href=""> <h:graphicImage
+																			style="width:100px;height:100px;"
+																			class="author_avatar"
+																			value="../Ressources/Uploads/67073055_2132007100435973_726767406319403008_n.jpg" />
+																	</a>
+																</div>
+																<p class="author_name">
+
+																</p>
+																<h5 class="author_description">
+																	<b> Kids in This CarPool :</b><br /> <br /> <a
+																		href=""> <h:graphicImage
+																			style="width: 50px; height: 50px;"
+																			class="author_avatar"
+																			value="../Ressources/Uploads/cute-success-kid-1920x1080.0.0.jpg" />
+																	</a><br />
+
+																</h5>
+															</div>
+															<div class="comment_block">
+																<div class="comment_title"
+																	style="width: 60%; display: inline-block; height: 150px;">
+																	<p>
+																		<h:outputText value="#{e.title}">
+																			<f:convertDateTime pattern="EEEE dd " />
+																		</h:outputText>
+																	</p>
+																	<hr />
+																</div>
+																<div
+																	style="width: 30%; display: inline-block; padding-left: 15%;">
+																	<h4>Available Places</h4>
+																	<p align="left"></p>
+																	<h2>
+																		<h:outputText value="#{e.nbPlaceDispo}">
+
+																		</h:outputText>
+																	</h2>
+																	<br />
+																</div>
+																<div class="title">
+																	<div
+																		style="width: 60%; display: inline-block; height: 150px;">
+																		<p>
+																			<h:outputText value="#{e.message}">
+
+																			</h:outputText>
+																		</p>
+																	</div>
+																	<div
+																		style="width: 30%; display: inline-block; padding-left: 15%;">
+																		<h3>From</h3>
+																		<p align="left">
+																			<h:outputText value="#{e.from}">
+
+																			</h:outputText>
+																		</p>
+																		<br />
+																		<h4>To</h4>
+																		<p align="left">
+																			<h:outputText value="#{e.to}">
+																			</h:outputText>
+																		</p>
+																		<br /> <br />
+																	</div>
+																</div>
+																<div class="comment_date" align="left">
+																	<span><i class="fa fa-calendar"></i> <h:outputText
+																			value="#{e.datee}">
+																			<f:convertDateTime pattern="dd-MMM-yyyy " />
+																		</h:outputText> </span><br /> <span><i class="fa fa-times"></i> <h:outputText
+																			value="#{e.timee}">
+																			<f:convertDateTime pattern="HH:mm " />
+																		</h:outputText> </span>
+																	<div class="button">
+																		<ul>
+																			<li><h:commandButton value="Contact"
+																					styleClass="apply"
+																					action="#{carPoolBean.contacter(e)}"
+																					onclick="return confirm('We will automatically send an email to the carpool owner he will reply you in your mail soon as he can . are You agree?')" />
+																			</li>
+																		</ul>
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+
+
+										<div class="col-md-4 ">
+											<div class="sidebar">
+												<div class="working_hours" align="left">
+													<h4>
+														<span><i class="fa fa-clock-o"></i></span>Daily
+													</h4>
+													<h4>
+														<span><i class="fa fa-align-left"></i></span>From :
+														<h:outputText value="#{e.datee}">
+															<f:convertDateTime pattern="dd-MMM-yyyy " />
+														</h:outputText>
+													</h4>
+													<ul>
+														<li class="day">Monday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Tuesday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Wednesday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Thursday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Friday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Saturday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Sunday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+
+									</c:if>
+
+									<c:if test="#{e.weekly and carPoolBean.test(e)}">
+										<div class="filterDiv fruits">
+											<div class="col-md-8 contact_link">
+												<div class="row review_comment comment_red">
+													<div class="comment_grid">
+														<div
+															class="col-md-12 year_c reviews_block comment_grid_item">
+															<div class="author_block">
+																<div class="shop_block_img">
+																	<a href=""> <h:graphicImage
+																			style="width:100px;height:100px;"
+																			class="author_avatar"
+																			value="../Ressources/Uploads/67073055_2132007100435973_726767406319403008_n.jpg" />
+																	</a>
+																</div>
+																<p class="author_name"></p>
+																<h5 class="author_description">
+																	<b> Kids in This CarPool :</b><br /> <br /> <a
+																		href=""> <h:graphicImage
+																			style="width: 50px; height: 50px;"
+																			class="author_avatar"
+																			value="../Ressources/Uploads/cute-success-kid-1920x1080.0.0.jpg" />
+																	</a><br />
+
+																</h5>
+															</div>
+															<div class="comment_block">
+																<div class="comment_title"
+																	style="width: 60%; display: inline-block; height: 150px;">
+																	<p>
+																		<h:outputText value="#{e.title}">
+																			<f:convertDateTime pattern="EEEE dd " />
+																		</h:outputText>
+																	</p>
+																	<hr />
+																</div>
+																<div
+																	style="width: 30%; display: inline-block; padding-left: 15%;">
+																	<h4>Available Places</h4>
+																	<p align="left"></p>
+																	<h2>
+																		<h:outputText value="#{e.nbPlaceDispo}">
+
+																		</h:outputText>
+																	</h2>
+																	<br />
+																</div>
+																<div class="title">
+																	<div
+																		style="width: 60%; display: inline-block; height: 150px;">
+																		<p>
+																			<h:outputText value="#{e.message}">
+
+																			</h:outputText>
+																		</p>
+																	</div>
+																	<div
+																		style="width: 30%; display: inline-block; padding-left: 15%;">
+																		<h3>From</h3>
+																		<p align="left">
+																			<h:outputText value="#{e.from}">
+
+																			</h:outputText>
+																		</p>
+																		<br />
+																		<h4>To</h4>
+																		<p align="left">
+																			<h:outputText value="#{e.to}">
+																			</h:outputText>
+																		</p>
+																		<br /> <br />
+																	</div>
+																</div>
+																<div class="comment_date" align="left">
+																	<span><i class="fa fa-calendar"></i> <h:outputText
+																			value="#{e.datee}">
+																			<f:convertDateTime pattern="dd-MMM-yyyy " />
+																		</h:outputText> </span><br /> <span><i class="fa fa-times"></i> <h:outputText
+																			value="#{e.timee}">
+																			<f:convertDateTime pattern="HH:mm " />
+																		</h:outputText> </span>
+
+																	<div class="button">
+																		<ul>
+																			<li><h:commandButton value="Contact"
+																					action="#{carPoolBean.contacter(e)}"
+																					onclick="return confirm('We will automatically send an email to the carpool owner he will reply you in your mail soon as he can . are You agree?')" />
+																			</li>
+																		</ul>
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+
+
+										<div class="col-md-4">
+											<div class="sidebar ">
+												<div class="working_hours" align="left">
+													<h4>
+														<span><i class="fa fa-clock-o"></i></span>Weekly
+													</h4>
+													<h4>
+														<span><i class="fa fa-align-left"></i></span>From :
+														<h:outputText value="#{e.datee}">
+															<f:convertDateTime pattern="dd-MMM-yyyy " />
+														</h:outputText>
+													</h4>
+													<h4>
+														<span><i class="fa fa-align-left"></i></span>Until :
+														<h:outputText value="#{e.untilDatee}">
+															<f:convertDateTime pattern="dd-MMM-yyyy " />
+														</h:outputText>
+													</h4>
+													<ul>
+														<li class="day">Monday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Tuesday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Wednesday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Thursday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Friday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Saturday</li>
+														<li>NotDispo</li>
+													</ul>
+													<ul>
+														<li class="day">Sunday</li>
+														<li>NotDispo</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+
+									</c:if>
+
+									<c:if test="#{e.everyWeekDay and carPoolBean.test(e)}">
+										<div class="filterDiv fruits">
+											<div class="col-md-8 contact_link">
+												<div class="row review_comment comment_green">
+													<div class="comment_grid">
+														<div
+															class="col-md-12 year_c reviews_block comment_grid_item">
+															<div class="author_block">
+																<div class="shop_block_img">
+																	<a href=""> <h:graphicImage
+																			style="width:100px;height:100px;"
+																			class="author_avatar"
+																			value="../Ressources/Uploads/67073055_2132007100435973_726767406319403008_n.jpg" />
+																	</a>
+																</div>
+																<p class="author_name"></p>
+																<h5 class="author_description">
+																	<b> Kids in This CarPool :</b><br /> <br /> <a
+																		href=""> <h:graphicImage
+																			style="width: 50px; height: 50px;"
+																			class="author_avatar"
+																			value="../Ressources/Uploads/cute-success-kid-1920x1080.0.0.jpg" />
+																	</a><br />
+
+																</h5>
+															</div>
+															<div class="comment_block">
+																<div class="comment_title"
+																	style="width: 60%; display: inline-block; height: 150px;">
+																	<p>
+																		<h:outputText value="#{e.title}">
+																			<f:convertDateTime pattern="EEEE dd " />
+																		</h:outputText>
+																	</p>
+																	<hr />
+																</div>
+																<div
+																	style="width: 30%; display: inline-block; padding-left: 15%;">
+																	<h4>Available Places</h4>
+																	<p align="left"></p>
+																	<h2>
+																		<h:outputText value="#{e.nbPlaceDispo}">
+
+																		</h:outputText>
+																	</h2>
+																	<br />
+																</div>
+																<div class="title">
+																	<div
+																		style="width: 60%; display: inline-block; height: 150px;">
+																		<p>
+																			<h:outputText value="#{e.message}">
+
+																			</h:outputText>
+																		</p>
+																	</div>
+																	<div
+																		style="width: 30%; display: inline-block; padding-left: 15%;">
+																		<h3>From</h3>
+																		<p align="left">
+																			<h:outputText value="#{e.from}">
+
+																			</h:outputText>
+																		</p>
+																		<br />
+																		<h4>To</h4>
+																		<p align="left">
+																			<h:outputText value="#{e.to}">
+																			</h:outputText>
+																		</p>
+																		<br /> <br />
+																	</div>
+																</div>
+																<div class="comment_date" align="left">
+																	<span><i class="fa fa-calendar"></i> <h:outputText
+																			value="#{e.datee}">
+																			<f:convertDateTime pattern="dd-MMM-yyyy " />
+																		</h:outputText> </span><br /> <span><i class="fa fa-times"></i> <h:outputText
+																			value="#{e.timee}">
+																			<f:convertDateTime pattern="HH:mm " />
+																		</h:outputText> </span>
+																	<div class="button">
+																		<ul>
+																			<li><h:commandButton value="Contact"
+																					styleClass="apply"
+																					action="#{carPoolBean.contacter(e)}"
+																					onclick="return confirm('We will automatically send an email to the carpool owner he will reply you in your mail soon as he can . are You agree?')" />
+																			</li>
+																		</ul>
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+
+
+										<div class="col-md-4">
+											<div class="sidebar">
+												<div class="working_hours" align="left">
+													<h4>
+														<span><i class="fa fa-clock-o"></i></span>EveryWeekDay
+													</h4>
+													<h4>
+														<span><i class="fa fa-align-left"></i></span>From :
+														<h:outputText value="#{e.datee}">
+															<f:convertDateTime pattern="dd-MMM-yyyy " />
+														</h:outputText>
+													</h4>
+													<ul>
+														<li class="day">Monday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Tuesday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Wednesday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Thursday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Friday</li>
+														<li><h:outputText value="#{e.timee}">
+																<f:convertDateTime pattern="HH:mm " />
+															</h:outputText></li>
+													</ul>
+													<ul>
+														<li class="day">Saturday</li>
+														<li>NotDispo</li>
+													</ul>
+													<ul>
+														<li class="day">Sunday</li>
+														<li>NotDispo</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+
+
+									</c:if>
+									<c:if
+										test="#{!e.daily and !e.weekly and !e.everyWeekDay and carPoolBean.test(e)}">
+										<div class="filterDiv fruits">
+											<div class="col-md-8 contact_link">
+												<div class="row review_comment comment_green">
+													<div class="comment_grid">
+														<div
+															class="col-md-12 year_c reviews_block comment_grid_item">
+															<div class="author_block">
+																<div class="shop_block_img">
+																	<a href=""> <h:graphicImage
+																			style="width:100px;height:100px;"
+																			class="author_avatar"
+																			value="../Ressources/Uploads/67073055_2132007100435973_726767406319403008_n.jpg" />
+																	</a>
+																</div>
+																<p class="author_name"></p>
+																<h5 class="author_description">
+																	<b> Kids in This CarPool :</b><br /> <br /> <a
+																		href=""> <h:graphicImage
+																			style="width: 50px; height: 50px;"
+																			class="author_avatar"
+																			value="../Ressources/Uploads/cute-success-kid-1920x1080.0.0.jpg" />
+																	</a><br />
+
+																</h5>
+															</div>
+															<div class="comment_block">
+																<div class="comment_title"
+																	style="width: 60%; display: inline-block; height: 150px;">
+																	<p>
+																		<h:outputText value="#{e.title}">
+																			<f:convertDateTime pattern="EEEE dd " />
+																		</h:outputText>
+																	</p>
+																	<hr />
+																</div>
+																<div
+																	style="width: 30%; display: inline-block; padding-left: 15%;">
+																	<h4>Available Places</h4>
+																	<p align="left"></p>
+																	<h2>
+																		<h:outputText value="#{e.nbPlaceDispo}">
+
+																		</h:outputText>
+																	</h2>
+																	<br />
+																</div>
+																<div class="title">
+																	<div
+																		style="width: 60%; display: inline-block; height: 150px;">
+																		<p>
+																			<h:outputText value="#{e.message}">
+
+																			</h:outputText>
+																		</p>
+																	</div>
+																	<div
+																		style="width: 30%; display: inline-block; padding-left: 15%;">
+																		<h3>From</h3>
+																		<p align="left">
+																			<h:outputText value="#{e.from}">
+
+																			</h:outputText>
+																		</p>
+																		<br />
+																		<h4>To</h4>
+																		<p align="left">
+																			<h:outputText value="#{e.to}">
+																			</h:outputText>
+																		</p>
+																		<br /> <br />
+																	</div>
+																</div>
+																<div class="comment_date" align="left">
+																	<span><i class="fa fa-calendar"></i> <h:outputText
+																			value="#{e.datee}">
+																			<f:convertDateTime pattern="dd-MMM-yyyy " />
+																		</h:outputText> </span><br /> <span><i class="fa fa-times"></i> <h:outputText
+																			value="#{e.timee}">
+																			<f:convertDateTime pattern="HH:mm " />
+																		</h:outputText> </span>
+																	<div class="button">
+																		<ul>
+																			<li><h:commandButton value="Contact"
+																					styleClass="apply"
+																					action="#{carPoolBean.contacter(e)}"
+																					onclick="return confirm('We will automatically send an email to the carpool owner. are You agree?')" />
+																			</li>
+																		</ul>
+
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</c:if>
+								</c:forEach>
+							</div>
+
+						</div>
+					</div>
+
+				</section>
+			</ul>
+			
+	
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+

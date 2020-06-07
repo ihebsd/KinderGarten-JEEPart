@@ -61,6 +61,9 @@ public class KinderGartenService implements KinderGartenServiceRemote {
 			m.setCost(object.getJsonObject(i).getInt("Cost"));
 			m.setNbrEmp(object.getJsonObject(i).getInt("NbrEmp"));
 			m.setPhone(object.getJsonObject(i).getInt("Phone"));
+			m.setLatitude(Double.parseDouble(object.getJsonObject(i).getString("latitude")));
+			m.setLongitude(Double.parseDouble(object.getJsonObject(i).getString("longitude")));
+
 
 			lasp.add(m);
 		}

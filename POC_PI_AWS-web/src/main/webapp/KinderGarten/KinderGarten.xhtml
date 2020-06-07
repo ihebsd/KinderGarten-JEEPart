@@ -13,6 +13,9 @@
 		<h:form>
 			<ul class="filter">
 
+				<h:outputLabel>Search :</h:outputLabel>
+				<h:inputText value="#{kinderGartenBean.searchString}"></h:inputText>
+				<h:commandButton action="#{kinderGartenBean.search}" value="Search"></h:commandButton>
 
 
 
@@ -56,9 +59,9 @@
 									</div>
 									<div class="grids_brief ml_250">
 										<h4 class="grids_title t_red">
-											<h:commandLink 
-												action="#{kinderGartenBean.Details(k)}"><span><h:outputText
-														value=" #{k.name}" /> </span></h:commandLink >
+											<h:commandLink action="#{kinderGartenBean.Details(k)}">
+												<span><h:outputText value=" #{k.name}" /> </span>
+											</h:commandLink>
 										</h4>
 										<p class="grids_description t_grey">
 											<span><h:outputText value=" #{k.description}" /> </span>
