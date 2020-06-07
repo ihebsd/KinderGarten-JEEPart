@@ -26,7 +26,7 @@ import tn.esprit.jsf_app.interfaces.KinderGartenServiceRemote;
 @Stateful
 @LocalBean
 public class KinderGartenService implements KinderGartenServiceRemote {
-	public String GlobalEndPoint = "localhost:44326";
+	public String GlobalEndPoint = "kindergartenazure.azurewebsites.net";
 	EntityManager em;
 
 	@Override
@@ -34,7 +34,7 @@ public class KinderGartenService implements KinderGartenServiceRemote {
 		List<KinderGarten> lasp = new ArrayList<KinderGarten>();
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("http://" + GlobalEndPoint + "/api/KinderGarten");
+		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/KinderGarten");
 
 		Response response = web.request().get();
 
@@ -61,6 +61,9 @@ public class KinderGartenService implements KinderGartenServiceRemote {
 			m.setCost(object.getJsonObject(i).getInt("Cost"));
 			m.setNbrEmp(object.getJsonObject(i).getInt("NbrEmp"));
 			m.setPhone(object.getJsonObject(i).getInt("Phone"));
+			m.setLatitude(Double.parseDouble(object.getJsonObject(i).getString("latitude")));
+			m.setLongitude(Double.parseDouble(object.getJsonObject(i).getString("longitude")));
+
 
 			lasp.add(m);
 		}
@@ -73,7 +76,7 @@ public class KinderGartenService implements KinderGartenServiceRemote {
 
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client
-				.target("http://" + GlobalEndPoint + "/api/KinderGarten/Delete?id=" + KinderGarten.getKinderGartenId());
+				.target("https://" + GlobalEndPoint + "/api/KinderGarten/Delete?id=" + KinderGarten.getKinderGartenId());
 		WebTarget hello = target.path("");
 		Response response = hello.request(MediaType.APPLICATION_JSON_TYPE, MediaType.TEXT_PLAIN_TYPE).delete();
 
@@ -88,7 +91,7 @@ public class KinderGartenService implements KinderGartenServiceRemote {
 	@Override
 	public void Create(KinderGarten p) {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://" + GlobalEndPoint + "/api/KinderGarten/Create");
+		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/KinderGarten/Create");
 		WebTarget hello = target.path("");
 		Response response = hello.request().post(Entity.entity(p, MediaType.APPLICATION_JSON));
 
@@ -114,7 +117,7 @@ public class KinderGartenService implements KinderGartenServiceRemote {
 
 		
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://" + GlobalEndPoint + "/api/KinderGarten/Put?id="+id);
+		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/KinderGarten/Put?id="+id);
 		Response response = target
 		                 .request()
 		                 .put(Entity.entity(k, MediaType.APPLICATION_JSON));
