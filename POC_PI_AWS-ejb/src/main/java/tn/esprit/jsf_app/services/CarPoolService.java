@@ -47,7 +47,7 @@ public class CarPoolService implements CarPoolServiceRemote {
 		List<CarPool> lasp = new ArrayList<CarPool>();
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("http://" + GlobalEndPoint + "/api/CarPoolApi/");
+		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/CarPoolApi/");
 
 		Response response = web.request().get();
 
@@ -106,7 +106,7 @@ public class CarPoolService implements CarPoolServiceRemote {
 		List<CarPool> lasps = new ArrayList<CarPool>();
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("http://" + GlobalEndPoint + "/api/MyCar?idp="+idp);
+		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/MyCar?idp="+idp);
 
 		Response response = web.request().get();
 
@@ -153,7 +153,7 @@ public class CarPoolService implements CarPoolServiceRemote {
 	public void Create(CarPool p) {
 
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://" + GlobalEndPoint + "/api/CarPost");
+		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/CarPost");
 		WebTarget hello = target.path("");
 
 		Response response = hello.request().post(Entity.entity(p, MediaType.APPLICATION_JSON));
@@ -185,7 +185,7 @@ public class CarPoolService implements CarPoolServiceRemote {
 		System.out.println("OK");
 
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://" + GlobalEndPoint + "/api/Car/Put?idcar=" + idcar);
+		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/Car/Put?idcar=" + idcar);
 		Response response = target.request().put(Entity.entity(e, MediaType.APPLICATION_JSON));
 		System.out.println(response);
 	}
@@ -193,7 +193,7 @@ public class CarPoolService implements CarPoolServiceRemote {
 	@Override
 	public void Delete(CarPool car) {
 		Client cl = ClientBuilder.newClient();
-		WebTarget target = cl.target("http://" + GlobalEndPoint + "/api/CarPoolApi?id=" + car.getId());
+		WebTarget target = cl.target("https://" + GlobalEndPoint + "/api/CarPoolApi?id=" + car.getId());
 		WebTarget hello = target.path("");
 		Response res = (Response) hello.request().delete();
 	}
