@@ -27,10 +27,13 @@
 								</div>
 								<div class="grids_block_center">
 									<div class="date_events_left b_yellow_light">
-										<div class="date_middle">
-											<p class="pb_10">
-												<h:outputText value="#{e.dateEvent}">
-													<f:convertDateTime pattern="EEEE dd " />
+									<div class="date">
+											<span><h:outputText value="#{e.date}">
+													<f:convertDateTime pattern="dd " />
+												</h:outputText></span>
+											<p>
+												<h:outputText value="#{e.date}">
+													<f:convertDateTime pattern="MMM  " />
 												</h:outputText>
 											</p>
 										</div>

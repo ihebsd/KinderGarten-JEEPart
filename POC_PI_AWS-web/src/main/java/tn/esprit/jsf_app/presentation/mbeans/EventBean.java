@@ -3,18 +3,29 @@ package tn.esprit.jsf_app.presentation.mbeans;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.FileSystems;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.nio.file.Path;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.servlet.http.Part;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 import tn.esprit.jsf_app.DTO.*;
 import tn.esprit.jsf_app.services.EventService;
+import tn.esprit.jsf_app.services.UserMail;
 
 @ManagedBean
 @SessionScoped
@@ -31,12 +42,14 @@ public class EventBean {
 	public String HeureF;
 	public String Description;
 	private List<Event> Event;
+	private static final String QR_CODE_IMAGE_PATH = "C:\\Users\\Culer\\Desktop\\AWS_PI-master\\AWS_PI-master\\POC_PI_AWS-web\\src\\main\\webapp\\Ressources\\Uploads\\";
 	private static final long serialVersionUID = 1L;
 
 	EventService E = new EventService();
 	
 	private String LO;
-
+	@EJB
+	UserMail mail = new UserMail();
 	public String getLO() {
 		return LO;
 	}
@@ -148,9 +161,23 @@ public class EventBean {
 		System.out.println("aaaaaaaa"+date);
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		DateEvent = format.format(date);
+		generateQRCode();
 		System.out.println("aaaaaaaa"+DateEvent);
 
-		E.Create(new Event(Name, image, Category, number_P, DateEvent, HeureD, HeureF, Description));
+		E.Create(new Event(Name, image, Category, number_P, DateEvent, HeureD, HeureF, Description,qrCode));
+		Event newE = E.GetByQrCode(qrCode);
+		try {
+			generateQRCodeImage(
+					"https://kindergartenazure.azurewebsites.net/Event/Details/" + newE.getEventId(), 350,
+					350, qrCodePath);
+		} catch (WriterException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		for (User user : E.GetAllUsersMail()) {
+			sendMail(user.getEmail(), qrCode);
+		}
 		return "/Event/Event?faces-redirect=true";
 		
 	
@@ -241,6 +268,7 @@ public class EventBean {
 	public void setNumber_P(int number_P) {
 		this.number_P = number_P;
 	}
+	
 
 	public String getDateEvent() {
 		return DateEvent;
@@ -287,6 +315,79 @@ public class EventBean {
 
 	public void setE(EventService e) {
 		E = e;
+	}
+	private String qrCode;
+
+	public String getQrCode() {
+		return qrCode;
+	}
+
+	public void setQrCode(String qrCode) {
+		this.qrCode = qrCode;
+	}
+
+	String qrCodePath;
+
+	private void generateQRCode() {
+		String filename = getSaltString() + ".png";
+		qrCodePath = QR_CODE_IMAGE_PATH + filename;
+		System.out.println(qrCodePath);
+		this.setQrCode(filename);
+
+	}
+
+	private static void generateQRCodeImage(String text, int width, int height, String filePath)
+			throws WriterException, IOException {
+		QRCodeWriter qrCodeWriter = new QRCodeWriter();
+		BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
+		Path path = FileSystems.getDefault().getPath(filePath);
+		MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
+
+	}
+
+	private String getSaltString() {
+		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghigklmnopqrstuvwxyz1234567890";
+		StringBuilder salt = new StringBuilder();
+		Random rnd = new Random();
+		while (salt.length() < 30) { // length of the random string.
+			int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+			salt.append(SALTCHARS.charAt(index));
+		}
+		String saltStr = salt.toString();
+		return saltStr;
+
+	}
+
+	public void sendMail(String destination, String qr) {
+		String host = "smtp.gmail.com";
+		String port = "587";
+		String mailFrom = "0kholta@gmail.com";
+		String password = "KHOLTAkholta.123**";
+
+		// message info
+		String mailTo = destination;
+		String subject = "New Event";
+		StringBuffer body = new StringBuffer("<html>Attention parents: A new Event has been created.Stay safe!<br>");
+		body.append("Scan to show details:<br>");
+		body.append("<img src=\"cid:image1\" width=\"30%\" height=\"30%\" /><br>");
+
+		body.append("End of message.");
+		body.append("</html>");
+
+		// inline images
+		Map<String, String> inlineImages = new HashMap<String, String>();
+		inlineImages.put("image1",
+				"C:\\Users\\Culer\\Desktop\\AWS_PI-master\\AWS_PI-master\\POC_PI_AWS-web\\src\\main\\webapp\\Ressources\\Uploads\\"
+						+ qr);
+
+		try {
+			UserMail.send(host, port, mailFrom, password, mailTo, subject, body.toString(), inlineImages);
+			System.out.println("Email sent.");
+		} catch (Exception ex) {
+			System.out.println("Could not send email.");
+			ex.printStackTrace();
+		}
+
 	}
 
 }

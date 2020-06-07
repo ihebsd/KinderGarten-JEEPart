@@ -17,6 +17,7 @@ public class Event implements Serializable {
 	public String HeureD;
 	public String HeureF;
 	public String Description;
+	private String qrCode;
 	private static final long serialVersionUID = 1L;
 	
 	public Event() {
@@ -58,6 +59,12 @@ public class Event implements Serializable {
 	}
 	public void setDateEvent(String dateEvent) {
 		DateEvent = dateEvent;
+	}
+	public String getQrCode() {
+		return qrCode;
+	}
+	public void setQrCode(String qrCode) {
+		this.qrCode = qrCode;
 	}
 	public String getHeureD() {
 		return HeureD;
@@ -102,6 +109,19 @@ public class Event implements Serializable {
 		HeureD = heureD;
 		HeureF = heureF;
 		Description = description;
+	}
+	public Event(String name, String image, category category, int number_P, String dateEvent, String heureD,
+			String heureF, String description, String qrCode) {
+		super();
+		Name = name;
+		this.image = image;
+		Category = category;
+		this.number_P = number_P;
+		DateEvent = dateEvent;
+		HeureD = heureD;
+		HeureF = heureF;
+		Description = description;
+		this.qrCode = qrCode;
 	}
 	
 
