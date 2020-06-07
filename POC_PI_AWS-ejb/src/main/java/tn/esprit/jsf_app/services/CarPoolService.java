@@ -28,7 +28,7 @@ import tn.esprit.jsf_app.interfaces.CarPoolServiceRemote;
 @LocalBean
 public class CarPoolService implements CarPoolServiceRemote {
 
-	public String GlobalEndPoint = "localhost:44326";
+	public String GlobalEndPoint = "solutionweb20200606115334.azurewebsites.net";
 	EntityManager em;
 
 	@Override
