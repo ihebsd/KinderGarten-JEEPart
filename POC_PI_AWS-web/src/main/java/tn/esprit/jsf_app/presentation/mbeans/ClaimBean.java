@@ -88,7 +88,6 @@ public class ClaimBean {
 	public List<Claim> getClaims() {
 
 		Claims=Cs.GetAll();
-		System.out.println("ICII"+Cs.GetAll());
 		return Claims;
 	}
 
@@ -98,15 +97,14 @@ public class ClaimBean {
 
 
 	public String addClaim() {
-
 		Cs.Create(new Claim(Name, Description,ClaimType));
 
-		return "/Claim/AddClaim?faces-redirect=true";
+		return "/Claim/Claims?faces-redirect=true";
 
 	}
 
 	public String modifier(Claim e) throws IOException {
-
+this.setComplaintId(e.getComplaintId());
 		this.setName(e.getName());
 		this.setDescription(e.getDescription());
 		this.setClaimType(e.getClaimType());
@@ -124,11 +122,11 @@ public class ClaimBean {
 		this.setClaimType(e.getClaimType());
 		this.setStatus(e.getStatus());
 
-		return "/Claim/Details?faces-redirect=true";
+		return "/Claim/DetailsClaim?faces-redirect=true";
 
 	}
 	public String PutClaim() throws InterruptedException {
-
+System.out.println("updateeeeeeeeeeeeee"+ComplaintId);
 		Cs.Update( ComplaintId,new Claim(Name, Description,ClaimType));
 		
 		return "/Claim/Claims?faces-redirect=true";

@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/Template.xhtml" xmlns:p="http://primefaces.org/ui">
+
+	<ui:param name="page_name" value="Details" />
+	<ui:define name="body">
+		<h:form>
+		<div class="card height-auto">
+        <div class="card-body">
+            <div class="heading-layout1">
+                <div class="item-title">
+                    <h3>Claim details</h3>
+                </div>
+                <div class="dropdown">
+                    <a class="dropdown-toggle" href="#" role="button"
+                       data-toggle="dropdown" aria-expanded="false">...</a>
+
+                    <div class="dropdown-menu dropdown-menu-right">
+	<h:commandLink action="/Claim/Claims?faces-redirect=true"
+								value="Back to List" styleClass="btn btn-warning" />                    </div>
+                </div>
+            </div>
+            <div class="single-info-details">
+
+                <div class="item-content">
+
+
+                    <div class="info-table table-responsive">
+                        <table class="table text-nowrap">
+									<tbody>
+										<tr>
+											<td> Name : #{claimBean.name}</td>
+										</tr>
+										<tr>
+											<td> Description : #{claimBean.description}</td>
+										</tr>
+
+										<tr>
+
+									
+											<span>Day : <h:outputText value="#{claimBean.claimDate}">
+													<f:convertDateTime pattern="dd " />
+												</h:outputText></span>
+											<p>
+												Month : <h:outputText value="#{claimBean.claimDate}">
+													<f:convertDateTime pattern="MMM  " />
+												</h:outputText>
+											</p>
+																					</tr>
+											
+									
+										<tr>
+											<td> Type : #{claimBean.claimType}</td>
+										</tr>
+										<tr>
+											<td>Status : #{claimBean.status}</td>
+										</tr>
+										
+
+									</tbody>
+								</table>
+									<h:commandLink action="/Claim/Claims?faces-redirect=true"
+								value="Back to List" styleClass="btn btn-warning" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    
+		</h:form>
+	</ui:define>
+</ui:composition>
+		

@@ -17,6 +17,8 @@
 							<div class="item-title">
 								<h3>All claims</h3>
 							</div>
+							<h:commandButton action="/Claim/AddClaim?faces-redirect=true"
+					value="Add Claim" styleClass="btn btn-info" />
 							
 							<c:forEach items="#{claimBean.claims}" var="k" varStatus="metadata">
 							<div class="shop_item">

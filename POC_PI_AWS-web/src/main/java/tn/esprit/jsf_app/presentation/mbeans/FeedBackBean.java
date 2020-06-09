@@ -17,7 +17,7 @@ import tn.esprit.jsf_app.services.FeedBackService;
 @SessionScoped
 public class FeedBackBean {
 
-	int Us = User.getConnectedUser().getIdUser();
+
 	public int FeedBackId;
 	public String Description;
 	public Date FeedBackDate;
@@ -25,6 +25,10 @@ public class FeedBackBean {
 	private List<FeedBack> FeedBacks;
 	private static final long serialVersionUID = 1L;
 	public FeedBackService Cs = new FeedBackService();
+	
+	public FeedBackBean() {
+		
+	}
 
 	public int getFeedBackId() {
 		return FeedBackId;
@@ -60,14 +64,15 @@ public class FeedBackBean {
 
 	public String supprimer(FeedBack F) {
 		Cs.Delete(F);
-		return "/Claim/Claim?faces-redirect=true";
+		return "/FeedBack/FeedBacks?faces-redirect=true";
 	}
 
-	public String addClaim() {
+	public String addFeedBack() {
 
 		Cs.Create(new FeedBack(Description, FeedBackDate, sentiment));
+		this.setDescription(null);
 
-		return "/FeedBack/AddClaim?faces-redirect=true";
+		return "/FeedBack/AddFeedBack?faces-redirect=true";
 
 	}
 

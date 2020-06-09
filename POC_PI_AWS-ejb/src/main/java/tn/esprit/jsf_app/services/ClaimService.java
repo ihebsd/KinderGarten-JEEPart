@@ -28,7 +28,7 @@ import tn.esprit.jsf_app.interfaces.ClaimServiceRemote;
 @LocalBean
 public class ClaimService implements ClaimServiceRemote {
 
-	public String GlobalEndPoint = "localhost:44326";
+	public String GlobalEndPoint = "kindergartenazure.azurewebsites.net";
 	EntityManager em ;
 	
 	public ClaimService() {
@@ -40,7 +40,7 @@ public class ClaimService implements ClaimServiceRemote {
 		List<Claim> lasp = new ArrayList<Claim>();
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("http://" + GlobalEndPoint + "/api/Claim");
+		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/Claim");
 
 		Response response = web.request().get();
 
@@ -68,28 +68,22 @@ public class ClaimService implements ClaimServiceRemote {
 
 			lasp.add(m);
 		}
-		System.out.println("icii method");
 		return lasp;
 	}
 	@Override
-	public void Delete(Claim ComplaintId) {
+	public void Delete(Claim claim) {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client
-				.target("http://" + GlobalEndPoint + "/api/ClaimDelete?id=" + ComplaintId.getComplaintId());
+		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/ClaimApi?id=" + claim.getComplaintId());
 		WebTarget hello = target.path("");
-		Response response = hello.request(MediaType.APPLICATION_JSON_TYPE, MediaType.TEXT_PLAIN_TYPE).delete();
+		Response res = (Response) hello.request().delete();
 
-		System.out.println("LOG DELETED" + response.getStatus());
-		String result = response.readEntity(String.class);
-		System.out.println("XXXXXXXXXXX:" + result);
-
-		response.close();
+		
 		
 	}
 	@Override
 	public void Create(Claim c) {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://" + GlobalEndPoint + "/api/ClaimPost");
+		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/ClaimPost");
 		WebTarget hello = target.path("");
 		Response response = hello.request().post(Entity.entity(c, MediaType.APPLICATION_JSON));
 
@@ -109,11 +103,10 @@ public class ClaimService implements ClaimServiceRemote {
 		cl.setClaimType(c.getClaimType());
 		cl.setStatus(c.getStatus());
 
-		System.out.println("iddddddddd" + c);
 
 		
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://" + GlobalEndPoint + "/api/KinderGarten/Put?id="+id);
+		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/ClaimApi?id="+id);
 		Response response = target
 		                 .request()
 		                 .put(Entity.entity(c, MediaType.APPLICATION_JSON));
