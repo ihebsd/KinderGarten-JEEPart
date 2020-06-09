@@ -1,0 +1,117 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/Template.xhtml" xmlns:p="http://primefaces.org/ui">
+
+	<h:outputScript library="javax.faces" name="jsf.js" target="head" />
+
+	<ui:param name="page_name" value="Create" />
+	<ui:define name="body">
+		<h:form>
+			<li class="nav-item active"><h:commandLink
+					action="/kindergarten?faces-redirect=true" styleClass="nav-link">
+					<i class="material-icons">kindergarten</i>
+					<p>KinderGartens</p>
+				</h:commandLink></li>
+		</h:form>
+		<section id="authorization_page" class="authorization_page">
+
+			<div class="container">
+
+				<div class="row">
+
+					<div class="col-md-12">
+
+
+						<h:form enctype="multipart/form-data">
+
+							<div class="reg_box">
+								<DIV ALIGN="CENTER">
+									<h3>Name</h3>
+								</DIV>
+								<h:inputText value="#{kinderGartenBean.name}"
+									pt:placeholder="Name" styleClass="form-control" />
+
+
+								<DIV ALIGN="CENTER">
+									<h3>Description</h3>
+								</DIV>
+								<h:inputText value="#{kinderGartenBean.description}"
+									pt:placeholder="Description" styleClass="form-control" />
+
+								<DIV ALIGN="CENTER">
+									<h3>Address</h3>
+								</DIV>
+								<h:inputText value="#{kinderGartenBean.address}"
+									pt:placeholder="Address" styleClass="form-control" />
+
+								<DIV ALIGN="CENTER">
+									<h3>Cost</h3>
+								</DIV>
+								<h:inputText value="#{kinderGartenBean.cost}"
+									pt:placeholder="Cost" styleClass="form-control" />
+
+								<DIV ALIGN="CENTER">
+									<h3>Phone</h3>
+								</DIV>
+								<h:inputText value="#{kinderGartenBean.phone}"
+									pt:placeholder="Phone" styleClass="form-control" />
+
+								<DIV ALIGN="CENTER">
+									<h3>Number employees</h3>
+								</DIV>
+								<h:inputText value="#{kinderGartenBean.nbrEmp}"
+									pt:placeholder="NbrEmp" styleClass="form-control" />
+
+								<DIV ALIGN="CENTER">
+									<h3>Picture</h3>
+
+
+
+									<div id="upload-button">
+										<h:inputFile value="#{kinderGartenBean.logo}">
+
+											<f:passThroughAttribute name="accept" value="image/png" />
+											<f:ajax listener="#{kinderGartenBean.doUpload()}"
+												render="hsine" />
+											<f:ajax listener="#{kinderGartenBean.doUpload1()}"
+												render="hsine" />
+
+										</h:inputFile>
+									</div>
+
+
+								</DIV>
+
+
+
+
+
+
+							</div>
+
+
+
+							<h:commandButton action="#{kinderGartenBean.addKinderGarten}"
+								value="Create KinderGarten"
+								styleClass="btn btn-primary pull-center" id="hsine" />
+							<div class="clearfix"></div>
+
+
+						</h:form>
+
+
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+
+
+
+	</ui:define>
+</ui:composition>

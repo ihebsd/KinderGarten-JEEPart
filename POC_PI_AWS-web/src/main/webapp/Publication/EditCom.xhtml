@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/Template.xhtml" xmlns:p="http://primefaces.org/ui">
+
+	<h:outputScript library="javax.faces" name="jsf.js" target="head" />
+
+	<ui:param name="page_name" value="Update" />
+	<ui:define name="body">
+		<h:form enctype="multipart/form-data">
+			<div class="leave_reply b_light">
+				<h3>Edit Comment</h3>
+				<div class="contact_form_white">
+
+					<div id="form-messages"></div>
+					<h:inputText value="#{publicationBean.com}"
+						pt:placeholder="votre commentaire" styleClass="form-control" />
+
+					<h:commandButton value="Update"
+						action="#{publicationBean.UpdateComme}"
+						class="button b_green_green_light" />
+
+
+				</div>
+
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
