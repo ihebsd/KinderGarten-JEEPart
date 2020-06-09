@@ -32,38 +32,49 @@
 									<h3>Name</h3>
 								</DIV>
 								<h:inputText value="#{kinderGartenBean.name}"
-									pt:placeholder="Name" styleClass="form-control" />
+									pt:placeholder="Name" styleClass="form-control" id="name"
+									required="true" requiredMessage="required" />
 
-
+								<h:message for="name"></h:message>
 								<DIV ALIGN="CENTER">
 									<h3>Description</h3>
 								</DIV>
 								<h:inputText value="#{kinderGartenBean.description}"
-									pt:placeholder="Description" styleClass="form-control" />
+									pt:placeholder="Description" styleClass="form-control"
+									id="description" required="true" requiredMessage="required" />
+								<h:message for="description"></h:message>
 
 								<DIV ALIGN="CENTER">
 									<h3>Address</h3>
 								</DIV>
 								<h:inputText value="#{kinderGartenBean.address}"
-									pt:placeholder="Address" styleClass="form-control" />
+									pt:placeholder="Address" styleClass="form-control" id="address"
+									required="true" requiredMessage="required" />
+								<h:message for="address"></h:message>
 
 								<DIV ALIGN="CENTER">
 									<h3>Cost</h3>
 								</DIV>
 								<h:inputText value="#{kinderGartenBean.cost}"
-									pt:placeholder="Cost" styleClass="form-control" />
+									pt:placeholder="Cost" styleClass="form-control" id="cost"
+									required="true" requiredMessage="required" />
+								<h:message for="cost"></h:message>
 
 								<DIV ALIGN="CENTER">
 									<h3>Phone</h3>
 								</DIV>
 								<h:inputText value="#{kinderGartenBean.phone}"
-									pt:placeholder="Phone" styleClass="form-control" />
+									pt:placeholder="Phone" styleClass="form-control" id="phone"
+									required="true" requiredMessage="required" />
+								<h:message for="phone"></h:message>
 
 								<DIV ALIGN="CENTER">
 									<h3>Number employees</h3>
 								</DIV>
 								<h:inputText value="#{kinderGartenBean.nbrEmp}"
-									pt:placeholder="NbrEmp" styleClass="form-control" />
+									pt:placeholder="NbrEmp" styleClass="form-control" id="nbrEmp"
+									required="true" requiredMessage="required" />
+								<h:message for="nbrEmp"></h:message>
 
 								<DIV ALIGN="CENTER">
 									<h3>Picture</h3>
@@ -92,7 +103,7 @@
 										widgetVar="map" onPointClick="handlePointClick(event);"
 										style="width:100%;height:400px">
 										<p:ajax event="pointSelect"
-											listener="#{kinderGartenBean.onPointSelect}"  />
+											listener="#{kinderGartenBean.onPointSelect}" />
 									</p:gmap>
 								</div>
 
@@ -122,16 +133,18 @@
 
 							</div>
 
-            <br/><br/>
+							<br />
+							<br />
 							<h:commandButton action="#{kinderGartenBean.addKinderGarten}"
 								value="Create KinderGarten"
 								styleClass="btn btn-primary pull-center" id="hsine" />
-								
-							<div class="row pull-center">
-							<h:commandLink action="/KinderGarten/KinderGarten?faces-redirect=true"
-								value="Back to List" styleClass="btn btn-warning" />
 
-						</div>
+							<div class="row pull-center">
+								<h:commandLink
+									action="/KinderGarten/KinderGarten?faces-redirect=true"
+									value="Back to List" styleClass="btn btn-warning" />
+
+							</div>
 
 
 
