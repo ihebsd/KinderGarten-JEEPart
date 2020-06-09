@@ -362,6 +362,8 @@ public class KinderGartenBean implements Serializable {
 		this.setNbrEmp(0);
 		this.setDateCreation(null);
 		this.setImage(null);
+		this.setLongitude(0);
+		this.setLatitude(0);
 		this.KinderGarten = K.GetAll();
 
 		return "/KinderGarten/KinderGarten?faces-redirect=true";
