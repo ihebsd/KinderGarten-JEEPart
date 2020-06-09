@@ -122,11 +122,16 @@
 
 							</div>
 
-
+            <br/><br/>
 							<h:commandButton action="#{kinderGartenBean.addKinderGarten}"
 								value="Create KinderGarten"
 								styleClass="btn btn-primary pull-center" id="hsine" />
-							<div class="clearfix"></div>
+								
+							<div class="row pull-center">
+							<h:commandLink action="/KinderGarten/KinderGarten?faces-redirect=true"
+								value="Back to List" styleClass="btn btn-warning" />
+
+						</div>
 
 
 

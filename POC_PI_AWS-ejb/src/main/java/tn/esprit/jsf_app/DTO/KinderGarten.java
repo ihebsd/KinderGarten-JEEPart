@@ -166,6 +166,21 @@ public class KinderGarten implements Serializable {
 		NbrEmp = nbrEmp;
 	}
 
+	public KinderGarten(int kinderGartenId, String name, String description, String address, float cost, int phone,
+			String image, int nbrEmp, double longitude, double latitude) {
+		super();
+		KinderGartenId = kinderGartenId;
+		Name = name;
+		Description = description;
+		Address = address;
+		Cost = cost;
+		Phone = phone;
+		Image = image;
+		NbrEmp = nbrEmp;
+		this.longitude = longitude;
+		this.latitude = latitude;
+	}
+
 	public KinderGarten(String name, String description, String address, float cost, int phone, String image,
 			int nbrEmp, int directeurId, double longitude, double latitude) {
 		super();

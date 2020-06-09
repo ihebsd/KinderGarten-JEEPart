@@ -1,15 +1,14 @@
 package tn.esprit.jsf_app.presentation.mbeans;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
-import org.jboss.resteasy.util.GetRestful;
-
-import tn.esprit.jsf_app.DTO.KinderGarten;
 import tn.esprit.jsf_app.DTO.User;
 import tn.esprit.jsf_app.DTO.role;
 import tn.esprit.jsf_app.services.UserService;
 import tn.esprit.utilities.UserGet;
 
+@SessionScoped
 @ManagedBean
 public class UserBean {
 	private String nom;
@@ -19,7 +18,7 @@ public class UserBean {
 	private String login;
 
 	private String email;
-
+	private int phone;
 	private String password;
 	private role role;
 	private String Confirmpassword;
@@ -32,6 +31,14 @@ public class UserBean {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public int getPhone() {
+		return phone;
+	}
+
+	public void setPhone(int phone) {
+		this.phone = phone;
 	}
 
 	public String getPassword() {
@@ -111,7 +118,9 @@ public class UserBean {
 		}
 		// user static
 		User.setConnectedUser(user);
-
+		this.email = User.getConnectedUser().getEmail();
+		this.login = User.getConnectedUser().getLogin();
+		System.out.println("ahla bik" + User.getConnectedUser());
 		return "/KinderGarten/KinderGarten?faces-redirect=true";
 	}
 
@@ -139,4 +148,8 @@ public class UserBean {
 
 	}
 
+	public String Logout() {
+		User.setConnectedUser(null);
+		return "/Login/Login?faces-redirect=true";
+	}
 }

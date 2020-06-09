@@ -13,7 +13,7 @@ public class User implements Serializable {
 	private String login;
 
 	private String email;
-
+private int phone;
 	private String password;
 	private role role;
 	private String Confirmpassword;
@@ -36,6 +36,14 @@ public class User implements Serializable {
 
 	public static void setConnectedUser(User connectedUser) {
 		ConnectedUser = connectedUser;
+	}
+
+	public int getPhone() {
+		return phone;
+	}
+
+	public void setPhone(int phone) {
+		this.phone = phone;
 	}
 
 	public int getIdUser() {
@@ -145,14 +153,16 @@ public class User implements Serializable {
 		Confirmpassword = confirmpassword;
 		ResetPasswordCode = resetPasswordCode;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "User [idUser=" + idUser + ", nom=" + nom + ", prenom=" + prenom + ", login=" + login + ", email="
-				+ email + ", password=" + password + ", role=" + role + ", Confirmpassword=" + Confirmpassword
-				+ ", IsEmailVerified=" + IsEmailVerified + ", ResetPasswordCode=" + ResetPasswordCode + "]";
+				+ email + ", phone=" + phone + ", password=" + password + ", role=" + role + ", Confirmpassword="
+				+ Confirmpassword + ", IsEmailVerified=" + IsEmailVerified + ", ResetPasswordCode=" + ResetPasswordCode
+				+ ", ActivationCode=" + ActivationCode + "]";
 	}
-
+	
+	
 	
 	
 }

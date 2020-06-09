@@ -48,7 +48,7 @@ public class UserService implements UserServiceRemote {
 				user.setEmail(object.getJsonObject(i).getString("email"));
 
 				user.setLogin(object.getJsonObject(i).getString("login"));
-
+				
 			} catch (Exception e) {
 			}
 			users.add(user);
@@ -132,6 +132,7 @@ public class UserService implements UserServiceRemote {
 		response.close();
 
 	}
+
 	public void ResetPassword(User user) {
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("https://kindergartenazure.azurewebsites.net/api/LoginApi/ResetPassword");
@@ -143,5 +144,40 @@ public class UserService implements UserServiceRemote {
 
 		response.close();
 
+	}
+
+	public User GetUserById(int id) {
+		List<User> users = new ArrayList<User>();
+		Client client = ClientBuilder.newClient();
+
+		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/GetUserById?id=" + id);
+
+		Response response = web.request().get();
+
+		String result = response.readEntity(String.class);
+
+		JsonReader jsonReader = Json.createReader(new StringReader(result));
+		JsonArray object = jsonReader.readArray();
+
+		for (int i = 0; i < object.size(); i++) {
+
+			User user = new User();
+			user.setIdUser(object.getJsonObject(i).getInt("idUser"));
+			try {
+				user.setNom(object.getJsonObject(i).getString("nom"));
+				user.setPrenom(object.getJsonObject(i).getString("prenom"));
+				user.setPassword(object.getJsonObject(i).getString("password"));
+				user.setConfirmpassword(object.getJsonObject(i).getString("Confirmpassword"));
+				user.setEmail(object.getJsonObject(i).getString("email"));
+
+				user.setLogin(object.getJsonObject(i).getString("login"));
+
+			} catch (Exception e) {
+			}
+			users.add(user);
+
+		}
+
+		return users.get(0);
 	}
 }

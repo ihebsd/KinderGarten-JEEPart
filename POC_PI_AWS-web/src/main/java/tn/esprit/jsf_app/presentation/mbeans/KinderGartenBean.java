@@ -26,7 +26,12 @@ import org.primefaces.model.map.Marker;
 import tn.esprit.jsf_app.DTO.KinderGarten;
 import tn.esprit.jsf_app.DTO.User;
 import tn.esprit.jsf_app.services.KinderGartenService;
+import tn.esprit.jsf_app.services.UserService;
 
+/**
+ * @author Hsine
+ *
+ */
 @ManagedBean
 @SessionScoped
 public class KinderGartenBean implements Serializable {
@@ -40,6 +45,7 @@ public class KinderGartenBean implements Serializable {
 	public Date DateCreation;
 	public static String Image;
 	public int NbrEmp;
+	private int DirecteurId;
 	private List<KinderGarten> KinderGarten;
 	private static final long serialVersionUID = 1L;
 	public KinderGartenService K = new KinderGartenService();
@@ -48,7 +54,9 @@ public class KinderGartenBean implements Serializable {
 	private double latitude;
 	private MapModel simpleModel;
 	private Part logo;
+	private String email;
 	private String searchString = "";
+	UserService userservice = new UserService();
 
 	public String getSearchString() {
 		return searchString;
@@ -66,12 +74,28 @@ public class KinderGartenBean implements Serializable {
 		LO = lO;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Part getLogo() {
 		return logo;
 	}
 
 	public void setLogo(Part logo) {
 		this.logo = logo;
+	}
+
+	public int getDirecteurId() {
+		return DirecteurId;
+	}
+
+	public void setDirecteurId(int directeurId) {
+		DirecteurId = directeurId;
 	}
 
 	public int getKinderGartenId() {
@@ -254,7 +278,6 @@ public class KinderGartenBean implements Serializable {
 		LatLng latlng = event.getLatLng();
 		this.setLongitude(latlng.getLng());
 		this.setLatitude(latlng.getLat());
-		System.out.println(this.getLatitude() + "hhhhh" + this.getLongitude());
 		addMessage(new FacesMessage(FacesMessage.SEVERITY_INFO, "Point Selected",
 				"Lat:" + latlng.getLat() + ", Lng:" + latlng.getLng()));
 	}
@@ -271,6 +294,8 @@ public class KinderGartenBean implements Serializable {
 		this.setNbrEmp(0);
 		this.setDateCreation(null);
 		this.setImage(null);
+		this.setLongitude(0);
+		this.setLatitude(0);
 		this.KinderGarten = K.GetAll();
 
 		return "/KinderGarten/KinderGarten?faces-redirect=true";
@@ -288,6 +313,12 @@ public class KinderGartenBean implements Serializable {
 		this.setNbrEmp(e.getNbrEmp());
 		this.setDateCreation(e.getDateCreation());
 		this.setImage(e.getImage());
+		this.setLongitude(e.getLongitude());
+		this.setLatitude(e.getLatitude());
+		simpleModel = new DefaultMapModel();
+
+		LatLng coord1 = new LatLng(latitude, longitude);
+		simpleModel.addOverlay(new Marker(coord1, Name));
 
 		return "/KinderGarten/Edit?faces-redirect=true";
 
@@ -306,11 +337,13 @@ public class KinderGartenBean implements Serializable {
 		this.setLO(e.getImage());
 		this.setLongitude(e.getLongitude());
 		this.setLatitude(e.getLatitude());
+		this.setDirecteurId(e.getDirecteurId());
+		this.setEmail(userservice.GetUserById(DirecteurId).getEmail());
 		simpleModel = new DefaultMapModel();
 
 		LatLng coord1 = new LatLng(latitude, longitude);
 		simpleModel.addOverlay(new Marker(coord1, Name));
-		System.out.println("yezzi" + longitude);
+		
 
 		return "/KinderGarten/Details?faces-redirect=true";
 
@@ -319,7 +352,7 @@ public class KinderGartenBean implements Serializable {
 	public String PutKinder() throws InterruptedException {
 
 		K.Update(KinderGartenId,
-				new KinderGarten(KinderGartenId, Name, Description, Address, Cost, Phone, Image, NbrEmp));
+				new KinderGarten(KinderGartenId, Name, Description, Address, Cost, Phone, Image, NbrEmp,longitude,latitude));
 		this.setKinderGartenId(0);
 		this.setName(null);
 		this.setCost(0);
