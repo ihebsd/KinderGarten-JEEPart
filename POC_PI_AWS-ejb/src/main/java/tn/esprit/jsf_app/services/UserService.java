@@ -27,7 +27,7 @@ public class UserService implements UserServiceRemote {
 		Client client = ClientBuilder.newClient();
 
 		WebTarget web = client
-				.target("https://" + GlobalEndPoint + "/api/Login/Login?email=" + email + "&password=" + password);
+				.target("http://localhost:44326"  + "/api/Login/Login?email=" + email + "&password=" + password);
 
 		Response response = web.request().get();
 
@@ -62,7 +62,7 @@ public class UserService implements UserServiceRemote {
 		List<Boolean> bools = new ArrayList<Boolean>();
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/LoginApi/VerifyAccount?id=" + id);
+		WebTarget web = client.target("http://localhost:44326"  + "/api/LoginApi/VerifyAccount?id=" + id);
 
 		Response response = web.request().get();
 
@@ -86,7 +86,7 @@ public class UserService implements UserServiceRemote {
 		List<Boolean> bools = new ArrayList<Boolean>();
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/LoginApi/Verify?id=" + id);
+		WebTarget web = client.target("http://localhost:44326"  + "/api/LoginApi/Verify?id=" + id);
 
 		Response response = web.request().get();
 
@@ -109,7 +109,7 @@ public class UserService implements UserServiceRemote {
 	@Override
 	public void Register(User user) {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/Login/Register");
+		WebTarget target = client.target("http://localhost:44326"  + "/api/Login/Register");
 		WebTarget hello = target.path("");
 		Response response = hello.request().post(Entity.entity(user, MediaType.APPLICATION_JSON));
 
@@ -122,7 +122,7 @@ public class UserService implements UserServiceRemote {
 
 	public void ForgotPassword(User user) {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("https://solutionweb20200606115334.azurewebsites.net/api/LoginApi/ForgotPassword");
+		WebTarget target = client.target("http://localhost:44326/api/LoginApi/ForgotPassword");
 		WebTarget hello = target.path("");
 		Response response = hello.request().post(Entity.entity(user, MediaType.APPLICATION_JSON));
 
@@ -134,7 +134,7 @@ public class UserService implements UserServiceRemote {
 	}
 	public void ResetPassword(User user) {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("https://solutionweb20200606115334.azurewebsites.net/api/LoginApi/ResetPassword");
+		WebTarget target = client.target("http://localhost:44326/api/LoginApi/ResetPassword");
 		WebTarget hello = target.path("");
 		Response response = hello.request().post(Entity.entity(user, MediaType.APPLICATION_JSON));
 

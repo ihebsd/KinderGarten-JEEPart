@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import tn.esprit.jsf_app.DTO.CarPool;
+import tn.esprit.jsf_app.DTO.User;
 
 @Remote
 public interface CarPoolServiceRemote {
@@ -14,5 +15,5 @@ public interface CarPoolServiceRemote {
 	public void Delete(CarPool Id);
 	public void Create(CarPool p);
 	public void Update(int id,CarPool p);
-
+	
 }

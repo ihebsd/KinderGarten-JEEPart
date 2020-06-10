@@ -3,6 +3,7 @@ package tn.esprit.jsf_app.presentation.mbeans;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale.Category;
@@ -14,6 +15,7 @@ import javax.faces.bean.SessionScoped;
 import org.primefaces.context.RequestContext;
 
 import tn.esprit.jsf_app.DTO.CarPool;
+import tn.esprit.jsf_app.DTO.Kid;
 import tn.esprit.jsf_app.DTO.User;
 import tn.esprit.jsf_app.services.CarPoolService;
 import tn.esprit.jsf_app.services.MailUser;
@@ -42,9 +44,20 @@ public class CarPoolBean {
 	public Date UntilDatee;
 	public int idParent;
 	public int idKid;
+	private String nameKid;
 	public String destination, subject, msg;
+	private List<String> names ;
+
 	public int getId() {
 		return Id;
+	}
+
+	public List<String> getNames() {
+		return names;
+	}
+
+	public void setNames(List<String> names) {
+		this.names = names;
 	}
 
 	public List<CarPool> CarPool;
@@ -54,6 +67,11 @@ public class CarPoolBean {
 	CarPoolService E = new CarPoolService();
 
 	public List<CarPool> getCarPool() {
+		this.names= new ArrayList<String>();
+		for (Kid k : E.GetKidById(User.getConnectedUser().getIdUser())) {
+			names.add(k.getFirstName());
+
+		}
 		CarPool = E.GetAll();
 
 		return CarPool;
@@ -65,6 +83,14 @@ public class CarPoolBean {
 
 	public void setMyCarPool(List<CarPool> mycarPool) {
 		MyCarPool = mycarPool;
+	}
+
+	public String getNameKid() {
+		return nameKid;
+	}
+
+	public void setNameKid(String nameKid) {
+		this.nameKid = nameKid;
 	}
 
 	public List<CarPool> getMyCarPool() {
@@ -91,6 +117,14 @@ public class CarPoolBean {
 		return false;
 	}
 
+	public String getName(CarPool c, User u,Kid k) {
+
+		if (u.getIdUser() == c.idParent && u.getIdUser() == k.getIdKid() )
+			return u.getNom();
+		    return u.getPrenom();
+		    
+	}
+
 	public String AddCarPool() {
 		this.setIdParent(User.getConnectedUser().getIdUser());
 
@@ -104,14 +138,12 @@ public class CarPoolBean {
 			UntilDate = null;
 		}
 
-		System.out.println("date" + Date);
-		System.out.println("date" + Datee);
-
-		System.out.println("aaa");
+		this.idKid=E.GetIDKidByNom(nameKid);
+		System.out.println("aaa"+idKid);
 		E.Create(new CarPool(Id, Title, From, To, Time, Date, Message, NbPlaceDispo, Daily, Weekly, EveryWeekDay,
 				Others, UntilDate, idParent, idKid));
 
-		return "/CarPool/Index?faces-redirect=true";
+		return "/CarPool/MyIndex?faces-redirect=true";
 
 	}
 

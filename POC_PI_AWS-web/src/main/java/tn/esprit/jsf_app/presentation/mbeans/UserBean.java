@@ -111,6 +111,7 @@ public class UserBean {
 		}
 		// user static
 		User.setConnectedUser(user);
+		
 
 		return "/CarPool/Index?faces-redirect=true";
 	}

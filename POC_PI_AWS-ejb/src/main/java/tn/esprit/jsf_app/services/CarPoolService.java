@@ -21,7 +21,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tn.esprit.jsf_app.DTO.CarPool;
-
+import tn.esprit.jsf_app.DTO.Kid;
 import tn.esprit.jsf_app.interfaces.CarPoolServiceRemote;
 
 @Stateful
@@ -47,7 +47,7 @@ public class CarPoolService implements CarPoolServiceRemote {
 		List<CarPool> lasp = new ArrayList<CarPool>();
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/CarPoolApi/");
+		WebTarget web = client.target("http://localhost:44326"  + "/api/CarPoolApi/");
 
 		Response response = web.request().get();
 
@@ -73,7 +73,7 @@ public class CarPoolService implements CarPoolServiceRemote {
 			try {
 				m.setDatee(format.parse(object.getJsonObject(i).getString("Date")));
 				m.setTimee(format.parse(object.getJsonObject(i).getString("Time")));
-				//m.setUntilDatee(format.parse(object.getJsonObject(i).getString("UntilDate")));
+				// m.setUntilDatee(format.parse(object.getJsonObject(i).getString("UntilDate")));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -86,10 +86,64 @@ public class CarPoolService implements CarPoolServiceRemote {
 
 			lasp.add(m);
 		}
+		return lasp;
+
+	}
+
+	public List<Kid> GetKidById(int idp) {
+
+		List<Kid> lasp = new ArrayList<Kid>();
+		Client client = ClientBuilder.newClient();
+
+		WebTarget web = client.target("http://localhost:44326" + "/api/GetKids?idp=" + idp);
+
+		Response response = web.request().get();
+
+		String result = response.readEntity(String.class);
+
+		// System.out.println(result);
+		JsonReader jsonReader = Json.createReader(new StringReader(result));
+		JsonArray object = jsonReader.readArray();
+
+		for (int i = 0; i < object.size(); i++) {
+
+			Kid m = new Kid();
+			// String dateString;
+			m.setIdKid(object.getJsonObject(i).getInt("IdKid"));
+
+			m.setFirstName(object.getJsonObject(i).getString("FirstName"));
+
+			lasp.add(m);
+		}
 
 		return lasp;
 	}
-	
+
+	public int GetIDKidByNom(String idp) {
+
+		List<Integer> ints = new ArrayList<Integer>();
+		Client client = ClientBuilder.newClient();
+
+		WebTarget web = client.target("http://localhost:44326" + "/api/GetIdKid?idp=" + idp);
+
+		Response response = web.request().get();
+
+		String result = response.readEntity(String.class);
+
+		// System.out.println(result);
+		JsonReader jsonReader = Json.createReader(new StringReader(result));
+		JsonArray object = jsonReader.readArray();
+
+		for (int i = 0; i < object.size(); i++) {
+
+			int m;
+			m=object.getInt(i);
+			ints.add(m);
+		}
+
+		return ints.get(0);
+	}
+
 	@Override
 	public List<CarPool> GetMyCar(int idp) {
 		// Client client = ClientBuilder.newClient();
@@ -106,7 +160,7 @@ public class CarPoolService implements CarPoolServiceRemote {
 		List<CarPool> lasps = new ArrayList<CarPool>();
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/MyCar?idp="+idp);
+		WebTarget web = client.target("http://localhost:44326"  + "/api/MyCar?idp=" + idp);
 
 		Response response = web.request().get();
 
@@ -132,7 +186,7 @@ public class CarPoolService implements CarPoolServiceRemote {
 			try {
 				m.setDatee(format.parse(object.getJsonObject(i).getString("Date")));
 				m.setTimee(format.parse(object.getJsonObject(i).getString("Time")));
-				//m.setUntilDatee(format.parse(object.getJsonObject(i).getString("UntilDate")));
+				// m.setUntilDatee(format.parse(object.getJsonObject(i).getString("UntilDate")));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -153,7 +207,7 @@ public class CarPoolService implements CarPoolServiceRemote {
 	public void Create(CarPool p) {
 
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/CarPost");
+		WebTarget target = client.target("http://localhost:44326" + "/api/CarPost");
 		WebTarget hello = target.path("");
 
 		Response response = hello.request().post(Entity.entity(p, MediaType.APPLICATION_JSON));
@@ -185,7 +239,7 @@ public class CarPoolService implements CarPoolServiceRemote {
 		System.out.println("OK");
 
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/Car/Put?idcar=" + idcar);
+		WebTarget target = client.target("http://localhost:44326"  + "/api/Car/Put?idcar=" + idcar);
 		Response response = target.request().put(Entity.entity(e, MediaType.APPLICATION_JSON));
 		System.out.println(response);
 	}
@@ -193,7 +247,7 @@ public class CarPoolService implements CarPoolServiceRemote {
 	@Override
 	public void Delete(CarPool car) {
 		Client cl = ClientBuilder.newClient();
-		WebTarget target = cl.target("https://" + GlobalEndPoint + "/api/CarPoolApi?id=" + car.getId());
+		WebTarget target = cl.target("http://localhost:44326"  + "/api/CarPoolApi?id=" + car.getId());
 		WebTarget hello = target.path("");
 		Response res = (Response) hello.request().delete();
 	}

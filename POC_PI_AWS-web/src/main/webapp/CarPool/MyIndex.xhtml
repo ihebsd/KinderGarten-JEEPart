@@ -161,12 +161,12 @@
 																					action="#{carPoolBean.UpdateCarPool(e)}"
 																					style="width:1px;height:1px;background-color: white"
 																					onclick="return confirm('Are you sure you want to Edit?')" />
-																				<i class="fa fa-remove"></i></li>
+																				<i class="fa fa-edit"></i></li>
 																			<li><h:commandButton
-																					action="#{carPoolBean.delete(e)}"
+																					action="#{carPoolBean.supprimer(e)}"
 																					style="width:1px;height:1px;background-color: white "
 																					onclick="return confirm('Are you sure you want to Delete?')" />
-																				<i class="fa fa-edit"></i></li>
+																				<i class="fa fa-remove"></i></li>
 																		</ul>
 																	</div>
 
@@ -324,7 +324,7 @@
 																			value="#{e.timee}">
 																			<f:convertDateTime pattern="HH:mm " />
 																		</h:outputText> </span>
-																	<div class="button">
+																		<div class="button">
 																		<ul>
 																			<li><h:commandButton
 																					action="#{carPoolBean.UpdateCarPool(e)}"
@@ -332,7 +332,7 @@
 																					onclick="return confirm('Are you sure you want to Edit?')" />
 																				<i class="fa fa-edit"></i></li>
 																			<li><h:commandButton
-																					action="#{carPoolBean.delete(e)}"
+																					action="#{carPoolBean.supprimer(e)}"
 																					style="width:1px;height:1px;background-color: white "
 																					onclick="return confirm('Are you sure you want to Delete?')" />
 																				<i class="fa fa-remove"></i></li>
