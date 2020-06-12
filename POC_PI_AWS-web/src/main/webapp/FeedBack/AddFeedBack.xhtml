@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/Template1.xhtml" xmlns:p="http://primefaces.org/ui">
+
+	<ui:param name="page_name" value="Add feedback" />
+	<ui:define name="body">
+		<section id="about">
+			<div class="overlay_one">
+				<div class="bg_top"></div>
+				<div class="bg_bottom"></div>
+			</div>
+			<div class="overlay_two">
+				<div class="bg_top"></div>
+				<div class="bg_bottom"></div>
+			</div>
+			<div class="overlay_three">
+				<div class="bg_top"></div>
+				<div class="bg_bottom"></div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="about_tabs">
+							<div class="about_bear_img hidden-sm hidden-xs">
+								<img src="../Ressources/img/home/about_bear.png" alt="" />
+							</div>
+
+							<div class="tab-content about_tabs_content">
+								<div class="tab-pane tab_red active" id="education">
+									<h3>Give us your FeedBack</h3>
+									<h:form enctype="multipart/form-data">
+
+										<div class="reg_box">	
+											<DIV ALIGN="CENTER">
+												<h3>Description</h3>
+											</DIV>
+											<h:inputTextarea cols="30" rows="10" value="#{feedBackBean.description}"
+												pt:placeholder="Description" styleClass="form-control" />
+										</div>
+										<h:commandButton action="#{feedBackBean.addFeedBack}"
+											value="Create FeedBack" styleClass="btn btn-primary pull-center"
+											id="raslen" />
+										<div class="clearfix"></div>
+
+									</h:form>
+								</div>
+								<div class="col-md-5 hidden-sm hidden-xs about_img_content">
+									<img src="../Ressources/img/home/education.jpg" alt="" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/Template1.xhtml" xmlns:p="http://primefaces.org/ui">
+
+
+	<ui:param name="page_name" value="Events" />
+	<ui:define name="body">
+		<h:form>
+			<ul class="filter">
+				<h:commandButton action="/Event/Create?faces-redirect=true"
+					value="Create New Event" styleClass="btn btn-info" />
+
+
+				<c:forEach items="#{eventBean.event}" var="e" varStatus="metadata">
+
+					<div class="triple_grids">
+						<div class="col-md-4 wow fadeInUp">
+							<div class="grids_block">
+								<div class="grids_block_top">
+									<h:graphicImage value="../Ressources/Uploads/#{e.image}" />
+
+								</div>
+								<div class="grids_block_center">
+									<div class="date_events_left b_yellow_light">
+									<div class="date">
+											<span><h:outputText value="#{e.date}">
+													<f:convertDateTime pattern="dd " />
+												</h:outputText></span>
+											<p>
+												<h:outputText value="#{e.date}">
+													<f:convertDateTime pattern="MMM  " />
+												</h:outputText>
+											</p>
+										</div>
+									</div>
+									<div class="date_events_right b_green_green_light">
+										<p class="block_time pb_10">
+											<i class="fa fa-clock-o"><span></span></i>
+											<h:outputText value=" #{e.heureD}" />
+											-
+											<h:outputText value=" #{e.heureF}" />
+										</p>
+										<p class="block_time normal">
+											<span> </span>
+										<h1>Category :</h1>
+										<h:outputText value=" #{e.category}" />
+										</p>
+									</div>
+								</div>
+								<div class="grids_brief">
+
+
+
+									<h4 class="grids_title t_green_green_light">
+										<h:commandLink action="#{eventBean.Details(e)}">
+											<span><h:outputText value=" #{e.name}" /> </span>
+										</h:commandLink>
+									</h4>
+
+
+									<p class="grids_title t_red">
+										<h:outputText value=" #{e.description}" />
+									</p>
+									<h:commandButton action="#{eventBean.modifier(e)}"
+										value="Update" styleClass="btn btn-primary pull-center" />
+									<h:commandButton action="#{eventBean.supprimer(e)}"
+										value="Delete" styleClass="btn" />
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+				</c:forEach>
+			</ul>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

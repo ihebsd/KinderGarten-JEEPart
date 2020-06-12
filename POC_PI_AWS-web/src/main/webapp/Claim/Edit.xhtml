@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/Template1.xhtml" xmlns:p="http://primefaces.org/ui">
+
+	<h:outputScript library="javax.faces" name="jsf.js" target="head" />
+
+	<ui:param name="page_name" value="Update Claim" />
+	<ui:define name="body">
+		<section id="authorization_page" class="authorization_page">
+
+			<div class="container">
+
+				<div class="row">
+
+					<div class="col-md-12">
+
+
+						<h:form enctype="multipart/form-data">
+
+							<div class="reg_box">
+								<DIV ALIGN="CENTER">
+									<h3>Name</h3>
+								</DIV>
+								<h:inputText value="#{claimBean.name}"
+									pt:placeholder="Name" styleClass="form-control" />
+
+
+								<DIV ALIGN="CENTER">
+									<h3>Description</h3>
+								</DIV>
+								<h:inputText value="#{claimBean.description}"
+									pt:placeholder="Description" styleClass="form-control" />
+
+								<DIV ALIGN="CENTER">
+									<h3>ClaimType</h3>
+								</DIV>
+								<h:inputText value="#{claimBean.claimType}"
+									pt:placeholder="ClaimType" styleClass="form-control" />
+
+							</div>
+
+							<h:commandButton action="#{claimBean.PutClaim}"
+								value="modifier Claim"
+								styleClass="btn btn-primary pull-center" id="raslen" />
+							<div class="clearfix"></div>
+
+
+						</h:form>
+
+
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+	</ui:define>
+</ui:composition>

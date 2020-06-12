@@ -1,0 +1,162 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/CarPoolTemplate.xhtml" xmlns:p="http://primefaces.org/ui">
+
+	<h:outputScript library="javax.faces" name="jsf.js" target="head" />
+
+	<ui:param name="page_name" value="Update" />
+	<ui:define name="body">
+
+		<section id="authorization_page" class="authorization_page">
+
+			<div class="container">
+
+				<div class="row">
+					<div class="col-md-1"></div>
+					<div class="col-md-10 dot">
+						<h2 class="section-title">CarPooling</h2>
+						<p class="section-description pb_20">
+							Create your Carpool<br />For More Information <a href="">Show
+								More</a>
+						</p>
+					</div>
+					<div class="col-md-1"></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<h:form enctype="multipart/form-data">
+							<div class="bg">
+								<h3 align="left">Which Of your kids will be in this
+									carpool?</h3>
+
+
+
+								<br />
+								<h:inputText value="#{carPoolBean.title}" pt:placeholder="Title"
+									style="width:1000px" styleClass="form-control" />
+
+								<br />
+								<h:inputText value="#{carPoolBean.from}" pt:placeholder="Form"
+									style="width:1000px" styleClass="form-control" />
+								<br />
+
+								<h:inputText value="#{carPoolBean.to}" pt:placeholder="To"
+									style="width:1000px" styleClass="form-control" />
+
+								<br />
+								<p:calendar value="#{carPoolBean.timee}"
+									pattern="MM/dd/yyyy HH:mm:ss" styleClass="form-control"
+									pt:placeholder="Time" style="width:1000px">
+
+								</p:calendar>
+
+								<br />
+								<p:calendar value="#{carPoolBean.datee}"
+									pattern="MM/dd/yyyy HH:mm:ss" styleClass="form-control"
+									pt:placeholder="Date" style="width:1000px">
+
+								</p:calendar>
+								<br /> <br />
+								<h:inputText value="#{carPoolBean.message}"
+									pt:placeholder="Message" styleClass="form-control"
+									style="width:1000px" />
+
+
+								<br />
+
+								<h:inputText value="#{carPoolBean.nbPlaceDispo}"
+									pt:placeholder="Nombre places disponible" style="width:1000px"
+									styleClass="form-control">
+
+								</h:inputText>
+								<br />
+							</div>
+							<div class="text">
+								<div align="left">
+									 <h1 ><span>Repeat</span></h1> 
+								</div>
+								<br />
+							</div>
+
+
+
+							<div class="bg" align="left">
+								<div id="hidden_fields" style="padding-top: 20px" >
+									<div class="chiller_cb">
+										<h:selectBooleanCheckbox id="daily"
+											value="#{carPoolBean.daily}" />
+										<h5 for="hidden_field1">Daily</h5> <span></span>
+									</div>
+									<br />
+									<div class="chiller_cb">
+										<h:selectBooleanCheckbox id="weekly"
+											value="#{carPoolBean.weekly}" />
+										<h5 for="hidden_field2">EvereyWeekDay (Monday To
+											Friday)</h5> <span></span>
+									</div>
+									<br />
+									<div class="chiller_cb">
+										<h:selectBooleanCheckbox id="everyWeekDay"
+											value="#{carPoolBean.everyWeekDay}" />
+										<h5 for="hidden_field3">Weekly</h5><br /> <span></span>
+
+									</div>
+								</div>
+							</div>
+
+
+							<div class="bg">
+								<div id="weekly" style="padding-top: 20px">
+
+
+									<br />
+									<p:calendar value="#{carPoolBean.untilDatee}"
+										pattern="MM/dd/yyyy HH:mm:ss" styleClass="form-control"
+										pt:placeholder="Until Date" style="width:1000px"
+										required="false">
+
+									</p:calendar>
+
+
+								</div>
+							</div>
+							<h:commandButton action="#{carPoolBean.PutCarPool}"
+								value="Update CarPool" styleClass="btn btn-primary pull-center"
+								id="hsine" />
+								<h:commandLink action="/CarPool/MyIndex?faces-redirect=true"
+									value="Back to List" styleClass="btn btn-warning" />
+							<div class="clearfix"></div>
+
+
+						</h:form>
+
+
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+
+		<script>
+			var daily = $("input[name=hidden_field2],input[name=hidden_field3]");
+			var everyweekday = $("input[name=hidden_field1],input[name=hidden_field3]");
+			var weekly = $("input[name=hidden_field1],input[name=hidden_field2]");
+			$("input[name='hidden_field1']").change(function() {
+				daily.prop("disabled", this.checked);
+			});
+
+			$("input[name='hidden_field2']").change(function() {
+				everyweekday.prop("disabled", this.checked);
+			});
+			$("input[name='hidden_field3']").change(function() {
+				weekly.prop("disabled", this.checked);
+			});
+		</script>
+
+	</ui:define>
+</ui:composition>

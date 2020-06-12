@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/Template1.xhtml" xmlns:p="http://primefaces.org/ui">
+
+	<ui:param name="page_name" value="Claims" />
+	<ui:define name="body">
+		<h:form>
+			<ul class="filter">
+				<div class="col-md-9">
+					<div class="shop_nav">
+						<div class="shop_block_list">
+							<div class="item-title">
+								<h3>All claims</h3>
+							</div>
+							<h:commandButton action="/Claim/AddClaim?faces-redirect=true"
+					value="Add Claim" styleClass="btn btn-info" />
+							
+							<c:forEach items="#{claimBean.claims}" var="k" varStatus="metadata">
+							<div class="shop_item">
+								
+								<div class="item_describe">
+									<h5>
+										<h:commandLink action="#{claimBean.Details(k)}">
+												<span><h:outputText value=" #{k.name}" /> </span>
+											</h:commandLink>
+									</h5>
+
+									<div class="item_content"><h:outputText value="#{k.description}">
+													
+												</h:outputText></div>
+									<div class="item_price"><h:outputText value="#{k.claimType}">
+													
+												</h:outputText></div>
+									<div class="item_content"><h:outputText value="#{k.claimDate}">
+													<f:convertDateTime pattern=" MMM-yyyy" />
+												</h:outputText></div>
+									<div class="item_price"><h:outputText
+														value=" #{k.status}" /></div>
+									
+											<BR />
+											<h:commandButton action="#{claimBean.modifier(k)}"
+											value="Update" styleClass="btn btn-primary pull-center" />
+										<h:commandButton action="#{claimBean.supprimer(k)}"
+											value="Delete" styleClass="btn" />
+								</div>
+							</div>
+							</c:forEach>
+						</div>
+
+
+					</div>
+				</div>
+			</ul>
+		</h:form>
+	</ui:define>
+</ui:composition>

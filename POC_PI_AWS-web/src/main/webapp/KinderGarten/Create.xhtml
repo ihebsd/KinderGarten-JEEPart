@@ -1,0 +1,165 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/Template1.xhtml" xmlns:p="http://primefaces.org/ui">
+
+
+	<ui:param name="page_name" value="Create" />
+	<ui:define name="body">
+		<h:form>
+			<li class="nav-item active"><h:commandLink
+					action="/kindergarten?faces-redirect=true" styleClass="nav-link">
+					<i class="material-icons">kindergarten</i>
+					<p>KinderGartens</p>
+				</h:commandLink></li>
+		</h:form>
+		<section id="authorization_page" class="authorization_page">
+
+			<div class="container">
+
+				<div class="row">
+
+					<div class="col-md-12">
+
+
+						<h:form enctype="multipart/form-data">
+
+							<div class="reg_box">
+								<DIV ALIGN="CENTER">
+									<h3>Name</h3>
+								</DIV>
+								<h:inputText value="#{kinderGartenBean.name}"
+									pt:placeholder="Name" styleClass="form-control" id="name"
+									required="true" requiredMessage="required" />
+
+								<h:message for="name"></h:message>
+								<DIV ALIGN="CENTER">
+									<h3>Description</h3>
+								</DIV>
+								<h:inputText value="#{kinderGartenBean.description}"
+									pt:placeholder="Description" styleClass="form-control"
+									id="description" required="true" requiredMessage="required" />
+								<h:message for="description"></h:message>
+
+								<DIV ALIGN="CENTER">
+									<h3>Address</h3>
+								</DIV>
+								<h:inputText value="#{kinderGartenBean.address}"
+									pt:placeholder="Address" styleClass="form-control" id="address"
+									required="true" requiredMessage="required" />
+								<h:message for="address"></h:message>
+
+								<DIV ALIGN="CENTER">
+									<h3>Cost</h3>
+								</DIV>
+								<h:inputText value="#{kinderGartenBean.cost}"
+									pt:placeholder="Cost" styleClass="form-control" id="cost"
+									required="true" requiredMessage="required" />
+								<h:message for="cost"></h:message>
+
+								<DIV ALIGN="CENTER">
+									<h3>Phone</h3>
+								</DIV>
+								<h:inputText value="#{kinderGartenBean.phone}"
+									pt:placeholder="Phone" styleClass="form-control" id="phone"
+									required="true" requiredMessage="required" />
+								<h:message for="phone"></h:message>
+
+								<DIV ALIGN="CENTER">
+									<h3>Number employees</h3>
+								</DIV>
+								<h:inputText value="#{kinderGartenBean.nbrEmp}"
+									pt:placeholder="NbrEmp" styleClass="form-control" id="nbrEmp"
+									required="true" requiredMessage="required" />
+								<h:message for="nbrEmp"></h:message>
+
+								<DIV ALIGN="CENTER">
+									<h3>Picture</h3>
+
+
+
+									<div>
+										<div id="upload-button">
+											<h:inputFile value="#{kinderGartenBean.logo}">
+
+												<f:passThroughAttribute name="accept" value="image/png" />
+												<f:ajax listener="#{kinderGartenBean.doUpload()}"
+													render="@form" />
+												<f:ajax listener="#{kinderGartenBean.doUpload1()}"
+													render="@form" />
+
+											</h:inputFile>
+										</div>
+									</div>
+
+
+								</DIV>
+								<div class="event_maps">
+									<p:gmap id="gmap" center="36.8397794, 10.2012249" zoom="14"
+										type="ROADMAP" model="#{kinderGartenBean.simpleModel}"
+										widgetVar="map" onPointClick="handlePointClick(event);"
+										style="width:100%;height:400px">
+										<p:ajax event="pointSelect"
+											listener="#{kinderGartenBean.onPointSelect}" />
+									</p:gmap>
+								</div>
+
+								<script type="text/javascript">
+									var currentMarker = null;
+
+									function handlePointClick(event) {
+										if (currentMarker != null) {
+											currentMarker.setMap(null);
+											currentMarker = null;
+										}
+										if (currentMarker === null) {
+											currentMarker = new google.maps.Marker(
+													{
+														position : new google.maps.LatLng(
+																event.latLng
+																		.lat(),
+																event.latLng
+																		.lng())
+													});
+											PF('map').addOverlay(currentMarker);
+										}
+									}
+								</script>
+
+
+
+							</div>
+
+							<br />
+							<br />
+							<h:commandButton action="#{kinderGartenBean.addKinderGarten}"
+								value="Create KinderGarten"
+								styleClass="btn btn-primary pull-center" id="hsine" />
+
+							<div class="row pull-center">
+								<h:commandLink
+									action="/KinderGarten/KinderGarten?faces-redirect=true"
+									value="Back to List" styleClass="btn btn-warning" />
+
+							</div>
+
+
+
+
+						</h:form>
+
+
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+
+
+
+	</ui:define>
+</ui:composition>

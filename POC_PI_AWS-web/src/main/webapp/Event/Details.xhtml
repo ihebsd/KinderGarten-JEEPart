@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/Template1.xhtml" xmlns:p="http://primefaces.org/ui">
+
+
+	<ui:param name="page_name" value="Details" />
+	<ui:define name="body">
+		<h:form>
+			<div class="blog_block">
+				<h2 class="blog_title">Event Named : #{eventBean.name}</h2>
+				<div class="row blog_info">
+					<div class="col-md-2 col-sm-2 col-xs-12 pr_0">
+						<div class="date">
+							<ul>
+								<div class="date">
+									<span><h:outputText value="#{eventBean.date}">
+											<f:convertDateTime pattern="dd " />
+										</h:outputText></span>
+									<p>
+										<h:outputText value="#{eventBean.date}">
+											<f:convertDateTime pattern="MMM  " />
+										</h:outputText>
+									</p>
+								</div>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-12 prpl_0">
+						<div class="author">
+							<ul>
+								<li class="title">Place Number</li>
+								<li class="description"><a href="#">#{eventBean.number_P}</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-7 col-sm-7 col-xs-12 pl_0">
+						<div class="tag">
+							<ul>
+								<li class="title">Start Hour - End Hour</li>
+								<li class="description"><a href="#">#{eventBean.heureD}</a>,
+									<a href="#">#{eventBean.heureF}</a></li>
+							</ul>
+						</div>
+					</div>
+					<H1>Description :</H1>
+					#{eventBean.description}
+				</div>
+				<div class="blog_block_img wow fadeIn">
+					<h:graphicImage value="../Ressources/Uploads/#{eventBean.image}" />
+
+				</div>
+
+			</div>
+			<h:commandLink action="/Event/Event?faces-redirect=true"
+				value="Back to List" styleClass="btn btn-warning" />
+		</h:form>
+
+	</ui:define>
+</ui:composition>

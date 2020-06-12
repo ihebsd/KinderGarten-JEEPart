@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/Template1.xhtml" xmlns:p="http://primefaces.org/ui">
+
+	<h:outputScript library="javax.faces" name="jsf.js" target="head" />
+
+	<ui:param name="page_name" value="Create" />
+	<ui:define name="body">
+		<h:form enctype="multipart/form-data">
+
+
+
+
+
+
+			<div class="container">
+				<div class="row">
+					<h4>Create Pub</h4>
+					<hr />
+
+					<div class="reg_box">
+						<div class="col-md-10">
+							<h:inputText value="#{publicationBean.titlePub}"
+								pt:placeholder="Title" styleClass="form-control" />
+						</div>
+
+						<div class="col-md-10">
+							<h:inputText value="#{publicationBean.descriptionPub}"
+								pt:placeholder="Description" styleClass="form-control" />
+						</div>
+					</div>
+					<div class="reg_box">
+
+						<div class="col-md-10">
+							<h:inputFile value="#{publicationBean.logo}">
+
+								<f:passThroughAttribute name="accept" value="image/png" />
+								<f:ajax listener="#{publicationBean.doUpload()}" render="@form" />
+
+							</h:inputFile>
+						</div>
+
+					</div>
+					<h:commandButton action="#{publicationBean.addPublication}"
+						value="Create"
+						styleClass="btn btn-primary pull-center" id="hsine" />
+				</div>
+
+			</div>
+
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>

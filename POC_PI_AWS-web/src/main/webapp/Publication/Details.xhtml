@@ -1,0 +1,145 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/Template1.xhtml" xmlns:p="http://primefaces.org/ui">
+
+
+	<ui:param name="page_name" value="Publications" />
+	<ui:define name="body">
+		<h:form>
+			<section id="blog_page" class="blog_page">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-9">
+							<div class="blog_block">
+								<h3 class="blog_title">
+									<h:outputText value=" #{publicationBean.titlePub}" />
+								</h3>
+								<div class="row blog_info">
+									<div class="col-md-2 col-sm-2 col-xs-12 pr_0">
+										<div class="date">
+											<ul>
+												<li class="number"><h:outputText
+														value="#{publicationBean.datePub}">
+														<f:convertDateTime pattern="dd " />
+													</h:outputText></li>
+												<li class="date_month"><h:outputText
+														value="#{publicationBean.datePub}">
+														<f:convertDateTime pattern=" MMM-yyyy" />
+													</h:outputText></li>
+											</ul>
+										</div>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-12 prpl_0">
+										<div class="author">
+											<ul>
+												<li class="title">Posted by</li>
+												<li class="description"><a href="#"><h:outputText
+															value=" #{publicationBean.nom}" /> <h:outputText
+															value=" #{publicationBean.prenom}" /></a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="col-md-7 col-sm-7 col-xs-12 pl_0">
+										<div class="tag">
+											<ul>
+												<li class="title">Tags</li>
+												<li class="description"><a href="#">Education</a>, <a
+													href="#">Event</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="blog_block_img wow fadeIn">
+									<h:graphicImage
+										value="../Ressources/Uploads/#{publicationBean.img}" />
+								</div>
+								<div class="blog_brief content">
+									<p>
+										Description :
+										<h:outputText value=" #{publicationBean.descriptionPub}" />
+									</p>
+
+								</div>
+								<div class="leave_reply b_light">
+									<h3>Leave a Reply</h3>
+									<table>
+										<tr>
+
+
+
+											<h:inputText value="#{publicationBean.com}"
+												pt:placeholder="votre commentaire" styleClass="form-control" />
+											<h:commandButton value="Comment"
+												action="#{publicationBean.CreateComm()}"
+												class="button b_green_green_light" />
+										</tr>
+									</table>
+								</div>
+
+								<div class="comments" id="table">
+									<h4 class="title">
+										<h:outputText value=" #{publicationBean.nbr}" />
+										comment
+									</h4>
+									<c:forEach items="#{publicationBean.comments}" var="c"
+										varStatus="metadata">
+										<div class="level_one">
+											<div class="comment_content">
+												<div class="avatar" align="left">
+													<img src="../Ressources/img/blog/author1.jpg" alt="" />
+												</div>
+												<div class="block_comment">
+													<div class="head_comment">
+														<div class="comment_title" align="left">
+															<h5>
+																<h:outputText value=" #{c.nomUser}" />
+															</h5>
+															<p class="date">
+																<i class="fa fa-calendar"></i>
+																<h:outputText value="#{c.dateCom}">
+																	<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+																</h:outputText>
+															</p>
+														</div>
+														<div align="right">
+															<c:if test="#{publicationBean.testcom(c)}">
+
+																<h:commandButton value="Update Comment"
+																	action="#{publicationBean.UpdateComm(c)}"
+																	class="button b_green_green_light" />
+																<h:commandButton value="Delete Comment"
+																	action="#{publicationBean.deleteCom(c)}"
+																	class="button b_green_green_light" />
+															</c:if>
+
+														</div>
+													</div>
+													<div class="comment_describe" align="left">
+														<p>
+															<h:outputText value=" #{c.post}" />
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</c:forEach>
+
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

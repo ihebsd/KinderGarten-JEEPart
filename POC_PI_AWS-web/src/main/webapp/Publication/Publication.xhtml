@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Back/Template1.xhtml" xmlns:p="http://primefaces.org/ui">
+
+
+	<ui:param name="page_name" value="Publications" />
+	<ui:define name="body">
+		<h:form>
+		<h2>
+				<a href="./Create.jsf">Create New</a>
+			</h2>
+			<div class="col-md-9">
+
+				<div class="shop_block_list">
+					<c:forEach items="#{publicationBean.publications}" var="p"
+						varStatus="metadata">
+						<div class="shop_item">
+							<div class="shop_block_img">
+								<h:graphicImage value="../Ressources/Uploads/#{p.imagePub}" />
+							</div>
+							<div class="item_describe">
+								<h5>
+									<a href="shop_item.html"><h:outputText
+											value=" #{p.titlePub}" /></a>
+								</h5>
+
+								<div class="item_content">
+									<p>
+										Description :
+										<h:outputText value=" #{p.descriptionPub}" />
+									</p>
+
+
+
+								</div>
+								<c:if test="#{ publicationBean.test(p)}">
+									<h:commandButton value="Update"
+										action="#{publicationBean.modifier(p)}" class="button b_blue" />
+
+									<h:commandButton value="Delete"
+										action="#{publicationBean.supprimer(p)}" class="button b_red" />
+								</c:if>
+								<c:if test="#{not publicationBean.test(p)}">
+									<div class="comment_date">
+										<ul>
+											<li class="finger_up"><h:commandButton
+													action="#{publicationBean.Like(p)}" /><i
+												class="fa fa-thumbs-up"></i>
+											<h:outputText value=" #{p.nbLike}" /></li>
+											<li class="finger_down"><h:commandButton
+													action="#{publicationBean.disLike(p)}" /><i
+												class="fa fa-thumbs-down"></i>
+											<h:outputText value=" #{p.nbDislike}" /></li>
+										</ul>
+									</div>
+								</c:if>
+								<h:commandButton value="Details"
+									action="#{publicationBean.details(p)}" class="button b_green_green_light" />
+								
+
+							</div>
+
+
+
+						</div>
+
+					</c:forEach>
+
+
+
+				</div>
+
+			</div>
+
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
