@@ -21,20 +21,19 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import tn.esprit.jsf_app.DTO.Comment;
-import tn.esprit.jsf_app.DTO.KinderGarten;
 import tn.esprit.jsf_app.DTO.Publication;
 import tn.esprit.jsf_app.interfaces.PublicationServiceRemote;
 
 @Stateful
 @LocalBean
 public class PublicationService implements PublicationServiceRemote {
-	public String GlobalEndPoint = "localhost:44326";
+	public String GlobalEndPoint = "kindergartenazure.azurewebsites.net";
 	EntityManager em;
 
 	public void Like(int idp,int idu) {
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("http://" + GlobalEndPoint + "/api/like?idp="+idp+"&idu="+idu);
+		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/like?idp="+idp+"&idu="+idu);
 
 		Response response = web.request().get();
 
@@ -43,7 +42,7 @@ public class PublicationService implements PublicationServiceRemote {
 	public void Dislike(int idp,int idu) {
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("http://" + GlobalEndPoint + "/api/dislike?idp="+idp+"&idu="+idu);
+		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/dislike?idp="+idp+"&idu="+idu);
 
 		Response response = web.request().get();
 
@@ -51,7 +50,7 @@ public class PublicationService implements PublicationServiceRemote {
 	public void AnnulerLike(int idp,int idu) {
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("http://" + GlobalEndPoint + "/api/annulerlike?idp="+idp+"&idu="+idu);
+		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/annulerlike?idp="+idp+"&idu="+idu);
 
 		Response response = web.request().get();
 
@@ -69,7 +68,7 @@ public class PublicationService implements PublicationServiceRemote {
 		List<Boolean> bools = new ArrayList<Boolean>();
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("http://" + GlobalEndPoint + "/api/testLike?idp=" + idp+"&idu="+idu);
+		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/testLike?idp=" + idp+"&idu="+idu);
 
 		Response response = web.request().get();
 
@@ -92,7 +91,7 @@ public class PublicationService implements PublicationServiceRemote {
 		List<Boolean> bools = new ArrayList<Boolean>();
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("http://" + GlobalEndPoint + "/api/testDislike?idp=" + idp+"&idu="+idu);
+		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/testDislike?idp=" + idp+"&idu="+idu);
 
 		Response response = web.request().get();
 
@@ -117,7 +116,7 @@ public class PublicationService implements PublicationServiceRemote {
 		List<Publication> lasp = new ArrayList<Publication>();
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("http://" + GlobalEndPoint + "/api/PublicationApi");
+		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/PublicationApi");
 
 		Response response = web.request().get();
 
@@ -154,7 +153,7 @@ public class PublicationService implements PublicationServiceRemote {
 	public Publication GetById(int id) {
 		List<Publication> lasp = new ArrayList<Publication>();
 		Client client = ClientBuilder.newClient();
-		WebTarget web = client.target("http://" + GlobalEndPoint + "/api/PublicationApi/Details?id="+id);
+		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/PublicationApi/Details?id="+id);
 
 		Response response = web.request().get();
 
@@ -192,7 +191,7 @@ public class PublicationService implements PublicationServiceRemote {
 	public void Delete(Publication publication) {
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client
-				.target("http://" + GlobalEndPoint + "/api/PublicationApi/Delete?id=" + publication.getPublicationId());
+				.target("https://" + GlobalEndPoint + "/api/PublicationApi/Delete?id=" + publication.getPublicationId());
 		WebTarget hello = target.path("");
 		Response response = hello.request(MediaType.APPLICATION_JSON_TYPE, MediaType.TEXT_PLAIN_TYPE).delete();
 
@@ -206,7 +205,7 @@ public class PublicationService implements PublicationServiceRemote {
 	@Override
 	public void Create(Publication p) {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://" + GlobalEndPoint + "/api/PublicationApi/Create");
+		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/PublicationApi/Create");
 		WebTarget hello = target.path("");
 		Response response = hello.request().post(Entity.entity(p, MediaType.APPLICATION_JSON));
 
@@ -227,7 +226,7 @@ public class PublicationService implements PublicationServiceRemote {
 		System.out.println("iddddddddd" + k);
 
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://" + GlobalEndPoint + "/api/PublicationApi/Put?id=" + id);
+		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/PublicationApi/Put?id=" + id);
 		Response response = target.request().put(Entity.entity(k, MediaType.APPLICATION_JSON));
 		System.out.println(response);
 
@@ -237,7 +236,7 @@ public class PublicationService implements PublicationServiceRemote {
 		List<Comment> lasp = new ArrayList<Comment>();
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("http://" + GlobalEndPoint + "/api/Comments?id=" + id);
+		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/Comments?id=" + id);
 
 		Response response = web.request().get();
 
@@ -269,7 +268,7 @@ public class PublicationService implements PublicationServiceRemote {
 	}
 	public void CreateComment(int id,Comment p) {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://" + GlobalEndPoint + "/api/Comment/Create?id="+id);
+		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/Comment/Create?id="+id);
 		WebTarget hello = target.path("");
 		Response response = hello.request().post(Entity.entity(p, MediaType.APPLICATION_JSON));
 
@@ -281,7 +280,7 @@ public class PublicationService implements PublicationServiceRemote {
 	public void DeleteCom(Comment comment) {
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client
-				.target("http://" + GlobalEndPoint + "/api/Comment/Delete?id=" + comment.getCommentId());
+				.target("https://" + GlobalEndPoint + "/api/Comment/Delete?id=" + comment.getCommentId());
 		WebTarget hello = target.path("");
 		Response response = hello.request(MediaType.APPLICATION_JSON_TYPE, MediaType.TEXT_PLAIN_TYPE).delete();
 
@@ -299,7 +298,7 @@ public class PublicationService implements PublicationServiceRemote {
 
 
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://" + GlobalEndPoint + "/api/Comment/Put?id=" + id);
+		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/Comment/Put?id=" + id);
 		Response response = target.request().put(Entity.entity(k, MediaType.APPLICATION_JSON));
 
 	}

@@ -28,7 +28,7 @@ import tn.esprit.jsf_app.interfaces.FeedBackServiceRemote;
 @LocalBean
 public class FeedBackService  implements FeedBackServiceRemote{
 
-	public String GlobalEndPoint = "localhost:44326";
+	public String GlobalEndPoint = "kindergartenazure.azurewebsites.net";
 	EntityManager em ;
 	
 	@Override
@@ -36,7 +36,7 @@ public class FeedBackService  implements FeedBackServiceRemote{
 		List<FeedBack> lasp = new ArrayList<FeedBack>();
 		Client client = ClientBuilder.newClient();
 
-		WebTarget web = client.target("http://" + GlobalEndPoint + "/api/FeedBack");
+		WebTarget web = client.target("https://" + GlobalEndPoint + "/api/FeedBack");
 
 		Response response = web.request().get();
 
@@ -69,7 +69,7 @@ public class FeedBackService  implements FeedBackServiceRemote{
 	public void Delete(FeedBack FeedBackId) {
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client
-				.target("http://" + GlobalEndPoint + "/api/FeedBackApi?id=" + FeedBackId.getFeedBackId());
+				.target("https://" + GlobalEndPoint + "/api/FeedBackApi?id=" + FeedBackId.getFeedBackId());
 		WebTarget hello = target.path("");
 		Response response = hello.request(MediaType.APPLICATION_JSON_TYPE, MediaType.TEXT_PLAIN_TYPE).delete();
 
@@ -84,7 +84,7 @@ public class FeedBackService  implements FeedBackServiceRemote{
 	@Override
 	public void Create(FeedBack f) {
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://" + GlobalEndPoint + "/api/FeedPost");
+		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/FeedPost");
 		WebTarget hello = target.path("");
 		Response response = hello.request().post(Entity.entity(f, MediaType.APPLICATION_JSON));
 
@@ -106,7 +106,7 @@ public class FeedBackService  implements FeedBackServiceRemote{
 		System.out.println("iddddddddd" + f);
 	
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://" + GlobalEndPoint + "/api/FeedBackPut?id="+id);
+		WebTarget target = client.target("https://" + GlobalEndPoint + "/api/FeedBackPut?id="+id);
 		Response response = target
 		                 .request()
 		                 .put(Entity.entity(f, MediaType.APPLICATION_JSON));
